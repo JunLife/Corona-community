@@ -2,15 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const stateList = [true, false, false, false, false];
-  const handleSelected = () => {};
-
   return (
     <div className="navbar">
       <ul className="menu">
         <Link to="/" className="link">
           <li className="homeItem item">
-            <img src="/logo.png" className="homeIcon"></img>
+            <img src="/logo.png" alt="logo" className="homeIcon"></img>
             Corona19 Comunity
           </li>
         </Link>

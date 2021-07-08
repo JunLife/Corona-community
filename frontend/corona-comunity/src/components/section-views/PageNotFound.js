@@ -1,9 +1,9 @@
 import React from 'react';
 import { Jumbotron, Button } from 'react-bootstrap';
 
-const PageNotFound = ({ history }) => {
+const PageNotFound = props => {
   const goBack = () => {
-    history.goBack();
+    props.history.goBack();
   };
 
   return (

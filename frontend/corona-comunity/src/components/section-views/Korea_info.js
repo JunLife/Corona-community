@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Loading from '../component/Loading';
+import Loading from '../Loading';
 
 const Korea_info = () => {
   const [info, setInfo] = useState();
+
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(
-        `https://api.corona-19.kr/korea/country/new/?serviceKey=${process.env.REACT_APP_API_KEY}`
+        `https://api.corona-19.kr/korea/?serviceKey=${process.env.REACT_APP_API_KEY}`
       );
       const data = await response.json();
 
@@ -20,7 +21,11 @@ const Korea_info = () => {
     return <Loading></Loading>;
   }
 
-  return <div className="korea_info">{info}</div>;
+  return (
+    <div className="korea_info">
+      <div>{info}</div>
+    </div>
+  );
 };
 
 export default Korea_info;
