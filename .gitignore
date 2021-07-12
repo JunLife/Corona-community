@@ -39,24 +39,26 @@ out/
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-frontend/corona-comunity/node_modules
-frontend/corona-comunity//.pnp
-frontend/corona-comunity/.pnp.js
+frontend/corona-community/node_modules
+frontend/corona-community//.pnp
+frontend/corona-community/.pnp.js
 
 # testing
-frontend/corona-comunity//coverage
+frontend/corona-community//coverage
 
 # production
-frontend/corona-comunity//build
+frontend/corona-community//build
 
 # misc
-frontend/corona-comunity/.DS_Store
-frontend/corona-comunity/.env.local
-frontend/corona-comunity/.env.development.local
-frontend/corona-comunity/.env.test.local
-frontend/corona-comunity/.env.production.local
+frontend/corona-community/.DS_Store
+frontend/corona-community/.env.local
+frontend/corona-community/.env.development.local
+frontend/corona-community/.env.test.local
+frontend/corona-community/.env.production.local
 
-frontend/corona-comunity/npm-debug.log*
-frontend/corona-comunity/yarn-debug.log*
-frontend/corona-comunity/yarn-error.log*
+frontend/corona-community/npm-debug.log*
+frontend/corona-community/yarn-debug.log*
+frontend/corona-community/yarn-error.log*
+
+frontend/corona-community/.env
 
