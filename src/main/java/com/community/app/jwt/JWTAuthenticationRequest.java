@@ -3,7 +3,7 @@ package com.community.app.jwt;
 import lombok.Getter;
 
 @Getter
-public class JwtAuthenticationRequest {
+public class JWTAuthenticationRequest {
     private String username;
     private String password;
 }

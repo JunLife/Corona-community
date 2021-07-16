@@ -1,7 +1,7 @@
 package com.community.app.jwt;
 
 import com.community.app.utilities.CookieUtil;
-import com.community.app.utilities.JwtUtil;
+import com.community.app.utilities.JWTUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,13 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-
+public class JWTUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
-    private final JwtUtil jwtUtil;
+    private final JWTUtil jwtUtil;
     private final CookieUtil cookieUtil ;
 
-    public JwtUsernameAndPasswordAuthenticationFilter(AuthenticationManager authenticationManager, JwtUtil jwtUtil, CookieUtil cookieUtil) {
+    public JWTUsernameAndPasswordAuthenticationFilter(AuthenticationManager authenticationManager, JWTUtil jwtUtil, CookieUtil cookieUtil) {
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
         this.cookieUtil = cookieUtil;
@@ -31,8 +30,8 @@ public class JwtUsernameAndPasswordAuthenticationFilter extends UsernamePassword
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
         try {
-            JwtAuthenticationRequest authenticationRequest = new ObjectMapper()
-                    .readValue(request.getInputStream(), JwtAuthenticationRequest.class);
+            JWTAuthenticationRequest authenticationRequest = new ObjectMapper()
+                    .readValue(request.getInputStream(), JWTAuthenticationRequest.class);
             Authentication authentication = new UsernamePasswordAuthenticationToken(
                     authenticationRequest.getUsername(),
                     authenticationRequest.getPassword()
