@@ -39,11 +39,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
+                    .antMatchers("/", "/login").permitAll()
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()
                     .disable()
+                .logout()
+                    .deleteCookies(jwtUtil.getAccessTokenName())
+                    .logoutSuccessUrl("/")
+                    .and()
                 .addFilter(new JWTUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtUtil, cookieUtil))
                 .addFilterBefore(new JWTRequestFilter(jwtUtil, cookieUtil), JWTUsernameAndPasswordAuthenticationFilter.class);
     }

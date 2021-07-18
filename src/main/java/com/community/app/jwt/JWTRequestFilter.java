@@ -2,6 +2,7 @@ package com.community.app.jwt;
 
 import com.community.app.utilities.CookieUtil;
 import com.community.app.utilities.JWTUtil;
+import io.jsonwebtoken.Claims;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -40,14 +41,14 @@ public class JWTRequestFilter extends OncePerRequestFilter {
                     String jws = token.getValue();
 
                     if (jwtUtil.isValidToken(jws)) {
-                        String username = jwtUtil.getUser(jws);
+                        Claims claims = jwtUtil.getTokenBody(jws);
                         // find refresh token from the database
                         // if refresh token is not valid, than generate refresh token and store it.
 
                         // do next
                     } else {
                         // check the refresh token is valid
-                        // if not valid generate access token and refresh token
+                        // if not valid, generate access token and refresh token
                         // if valid, than generate only access token.
                     }
 

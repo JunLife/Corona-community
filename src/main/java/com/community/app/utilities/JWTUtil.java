@@ -60,12 +60,11 @@ public class JWTUtil {
         }
     }
 
-    public String getUser(String jws) {
+    public Claims getTokenBody(String jws) {
         return Jwts.parserBuilder()
                 .setSigningKey(secretKey.getBytes())
                 .build()
                 .parseClaimsJws(jws)
-                .getBody()
-                .getSubject();
+                .getBody();
     }
 }
