@@ -2,9 +2,9 @@ package com.community.app.config;
 
 import com.community.app.jwt.JWTRequestFilter;
 import com.community.app.jwt.JWTUsernameAndPasswordAuthenticationFilter;
-import com.community.app.jwt.UserTestService;
 import com.community.app.utilities.CookieUtil;
 import com.community.app.utilities.JWTUtil;
+import com.community.app.utilities.MemberDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -19,13 +19,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
-    private final UserTestService userTestService;
     private final CookieUtil cookieUtil;
     private final JWTUtil jwtUtil;
+    private final MemberDetailsService memberDetailsService;
 
-    public SecurityConfig(PasswordEncoder passwordEncoder, UserTestService userTestService, JWTUtil jwtUtil, CookieUtil cookieUtil) {
+    public SecurityConfig(PasswordEncoder passwordEncoder,
+                          MemberDetailsService memberDetailsService,
+                          JWTUtil jwtUtil,
+                          CookieUtil cookieUtil, MemberDetailsService memberDetailsService1) {
         this.passwordEncoder = passwordEncoder;
-        this.userTestService = userTestService;
+        this.memberDetailsService = memberDetailsService1;
         this.cookieUtil = cookieUtil;
         this.jwtUtil = jwtUtil;
     }
@@ -49,7 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .logoutSuccessUrl("/")
                     .and()
                 .addFilter(new JWTUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtUtil, cookieUtil))
-                .addFilterBefore(new JWTRequestFilter(jwtUtil, cookieUtil), JWTUsernameAndPasswordAuthenticationFilter.class);
+                .addFilterBefore(
+                        new JWTRequestFilter(jwtUtil, cookieUtil),
+                        JWTUsernameAndPasswordAuthenticationFilter.class
+                );
     }
 
     @Override
@@ -61,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(passwordEncoder);
-        provider.setUserDetailsService(userTestService);
+        provider.setUserDetailsService(memberDetailsService);
         return provider;
     }
 }

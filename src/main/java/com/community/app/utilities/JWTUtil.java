@@ -1,6 +1,5 @@
 package com.community.app.utilities;
 
-import com.community.app.jwt.UserTest;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
@@ -22,16 +21,11 @@ import java.util.Date;
 @Getter
 public class JWTUtil {
     private Long accessTokenExpiration;
-    private Long refreshTokenExpiration;
     private String secretKey;
     private String accessTokenName;
 
     public String generateAccessToken(Authentication authResult) {
         return generateToken(authResult.getName(), authResult.getAuthorities(), accessTokenExpiration);
-    }
-
-    public String generateRefreshToken(Authentication authResult) {
-        return generateToken(authResult.getName(), authResult.getAuthorities(), refreshTokenExpiration);
     }
 
     private String generateToken(String username, Collection<? extends GrantedAuthority> authorities, Long expireTime) {

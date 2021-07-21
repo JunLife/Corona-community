@@ -32,6 +32,7 @@ public class JWTUsernameAndPasswordAuthenticationFilter extends UsernamePassword
         try {
             JWTAuthenticationRequest authenticationRequest = new ObjectMapper()
                     .readValue(request.getInputStream(), JWTAuthenticationRequest.class);
+
             Authentication authentication = new UsernamePasswordAuthenticationToken(
                     authenticationRequest.getUsername(),
                     authenticationRequest.getPassword()
@@ -52,9 +53,7 @@ public class JWTUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
         String accessToken = jwtUtil.generateAccessToken(authResult);
-        String refreshToken = jwtUtil.generateRefreshToken(authResult);
-
-        response.addCookie(cookieUtil.createCookie(accessToken));
+        response.addCookie(cookieUtil.createAccessCookie(accessToken));
 
         chain.doFilter(request, response);
     }
