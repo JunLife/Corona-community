@@ -34,14 +34,14 @@ public class RestApiController {
         Member member = new Member();
         member.setEmail("user1");
         member.setPassword(passwordEncoder.encode("password"));
-        member.setRole(Role.MEMBER);
+        member.setRole(Role.ROLE_MEMBER);
         member.setAge(20);
         memberRopository.save(member);
 
         member = new Member();
         member.setEmail("user2");
         member.setPassword(passwordEncoder.encode("password"));
-        member.setRole(Role.ADMIN);
+        member.setRole(Role.ROLE_ADMIN);
         member.setAge(20);
         memberRopository.save(member);
 
@@ -61,5 +61,15 @@ public class RestApiController {
     @PostMapping(path = "/logout")
     public HttpEntity logout() {
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/test1")
+    public String test1() {
+        return "test1";
+    }
+
+    @GetMapping(path = "/test2")
+    public String test2() {
+        return "test2";
     }
 }

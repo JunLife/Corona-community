@@ -24,18 +24,14 @@ public class JWTUtil {
     private String secretKey;
     private String accessTokenName;
 
-    public String generateAccessToken(Authentication authResult) {
-        return generateToken(authResult.getName(), authResult.getAuthorities(), accessTokenExpiration);
-    }
-
-    private String generateToken(String username, Collection<? extends GrantedAuthority> authorities, Long expireTime) {
+    public String generateToken(Authentication authResult) {
         Date now = new Date();
 
         return Jwts.builder()
-                .setSubject(username)
-                .claim("authorities", authorities)
+                .setSubject(authResult.getName())
+                .claim("authorities", authResult.getAuthorities())
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + expireTime))
+                .setExpiration(new Date(now.getTime() + accessTokenExpiration))
                 .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()), SignatureAlgorithm.HS256)
                 .compact();
     }

@@ -52,7 +52,7 @@ public class JWTUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication authResult) throws IOException, ServletException {
-        String accessToken = jwtUtil.generateAccessToken(authResult);
+        String accessToken = jwtUtil.generateToken(authResult);
         response.addCookie(cookieUtil.createAccessCookie(accessToken));
 
         chain.doFilter(request, response);

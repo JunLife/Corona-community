@@ -1,0 +1,2 @@
+com/community/app/AppApplicationTests.java
+ com.community.app.AppApplicationTests
