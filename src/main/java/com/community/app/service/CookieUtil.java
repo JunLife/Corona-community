@@ -1,4 +1,4 @@
-package com.community.app.utilities;
+package com.community.app.service;
 
 import io.jsonwebtoken.JwtException;
 import org.springframework.stereotype.Component;

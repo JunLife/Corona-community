@@ -1,8 +1,7 @@
 package com.community.app.jwt;
 
-import com.community.app.config.Role;
-import com.community.app.utilities.CookieUtil;
-import com.community.app.utilities.JWTUtil;
+import com.community.app.service.CookieUtil;
+import com.community.app.service.JWTUtil;
 import io.jsonwebtoken.Claims;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

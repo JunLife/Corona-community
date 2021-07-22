@@ -2,31 +2,33 @@ package com.community.app.controller;
 
 import com.community.app.config.Role;
 import com.community.app.model.Member;
-import com.community.app.repository.MemberRopository;
-import com.community.app.utilities.CookieUtil;
-import com.community.app.utilities.JWTUtil;
+import com.community.app.model.Post;
+import com.community.app.repository.MemberRepository;
+import com.community.app.service.MemberDetailsService;
+import com.community.app.service.PostService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RestController
 public class RestApiController {
-    private final CookieUtil cookieUtil;
-    private final JWTUtil jwtUtil;
-    private final MemberRopository memberRopository;
+    private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MemberDetailsService memberDetailsService;
+    private final PostService postService;
 
-    public RestApiController(CookieUtil cookieUtil, JWTUtil jwtUtil, MemberRopository memberRopository, PasswordEncoder passwordEncoder) {
-        this.cookieUtil = cookieUtil;
-        this.jwtUtil = jwtUtil;
-        this.memberRopository = memberRopository;
+    public RestApiController(MemberRepository memberRepository,
+                             PasswordEncoder passwordEncoder,
+                             MemberDetailsService memberDetailsService, PostService postService) {
+        this.memberRepository = memberRepository;
         this.passwordEncoder = passwordEncoder;
+        this.memberDetailsService = memberDetailsService;
+        this.postService = postService;
     }
 
     @GetMapping(path = "/")
@@ -36,21 +38,26 @@ public class RestApiController {
         member.setPassword(passwordEncoder.encode("password"));
         member.setRole(Role.ROLE_MEMBER);
         member.setAge(20);
-        memberRopository.save(member);
+        memberRepository.save(member);
 
         member = new Member();
         member.setEmail("user2");
         member.setPassword(passwordEncoder.encode("password"));
         member.setRole(Role.ROLE_ADMIN);
         member.setAge(20);
-        memberRopository.save(member);
+        memberRepository.save(member);
 
         Member member1;
-        member1 = memberRopository.findByEmail("user1");
-        System.out.println(member1.getEmail());
+        member1 = memberRepository.findByEmail("user1");
 
-        List<Member> members = memberRopository.findAll();
+        List<Member> members = memberRepository.findAll();
         return members;
+    }
+
+    @PostMapping(path = "/signup")
+    public HttpEntity signup(@RequestBody Member member) {
+        memberDetailsService.saveMember(member);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/login")
@@ -63,13 +70,21 @@ public class RestApiController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @GetMapping(path = "/test1")
-    public String test1() {
-        return "test1";
+    @PostMapping(path = "/post")
+    public HttpEntity post(@RequestParam("email") String userEmail,
+                           @RequestParam(name = "file", required = false) MultipartFile file,
+                           @RequestParam("title") String title,
+                           @RequestParam("text") String text,
+                           Post post) throws Exception {
+
+        post.setTitle(title);
+        post.setTitle(text);
+        postService.save(post, userEmail, file);
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @GetMapping(path = "/test2")
-    public String test2() {
-        return "test2";
+    @GetMapping(path = "/adminTest")
+    public String test1() {
+        return "adminTest";
     }
 }

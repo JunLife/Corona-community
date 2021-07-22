@@ -2,9 +2,9 @@ package com.community.app.config;
 
 import com.community.app.jwt.JWTRequestFilter;
 import com.community.app.jwt.JWTUsernameAndPasswordAuthenticationFilter;
-import com.community.app.utilities.CookieUtil;
-import com.community.app.utilities.JWTUtil;
-import com.community.app.utilities.MemberDetailsService;
+import com.community.app.service.CookieUtil;
+import com.community.app.service.JWTUtil;
+import com.community.app.service.MemberDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -42,8 +42,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .authorizeRequests()
-                    .antMatchers("/", "/login").permitAll()
-                    .antMatchers("/test1").hasAuthority(Role.ROLE_ADMIN.name())
+                    .antMatchers("/", "/signup", "/login").permitAll()
+                    .antMatchers("/adminTest").hasAuthority(Role.ROLE_ADMIN.name())
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()

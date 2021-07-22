@@ -1,26 +1,36 @@
 {
   "groups": [
     {
+      "name": "application.file",
+      "type": "com.community.app.service.PostService",
+      "sourceType": "com.community.app.service.PostService"
+    },
+    {
       "name": "application.jwt",
-      "type": "com.community.app.utilities.JWTUtil",
-      "sourceType": "com.community.app.utilities.JWTUtil"
+      "type": "com.community.app.service.JWTUtil",
+      "sourceType": "com.community.app.service.JWTUtil"
     }
   ],
   "properties": [
     {
+      "name": "application.file.path",
+      "type": "java.lang.String",
+      "sourceType": "com.community.app.service.PostService"
+    },
+    {
       "name": "application.jwt.access-token-expiration",
       "type": "java.lang.Long",
-      "sourceType": "com.community.app.utilities.JWTUtil"
+      "sourceType": "com.community.app.service.JWTUtil"
     },
     {
       "name": "application.jwt.access-token-name",
       "type": "java.lang.String",
-      "sourceType": "com.community.app.utilities.JWTUtil"
+      "sourceType": "com.community.app.service.JWTUtil"
     },
     {
       "name": "application.jwt.secret-key",
       "type": "java.lang.String",
-      "sourceType": "com.community.app.utilities.JWTUtil"
+      "sourceType": "com.community.app.service.JWTUtil"
     }
   ],
   "hints": []

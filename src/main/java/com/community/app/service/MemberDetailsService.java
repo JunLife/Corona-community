@@ -1,13 +1,14 @@
-package com.community.app.utilities;
+package com.community.app.service;
 
 import com.community.app.model.Member;
-import com.community.app.repository.MemberRopository;
+import com.community.app.repository.MemberRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -15,22 +16,29 @@ import java.util.List;
 
 @Service
 public class MemberDetailsService implements UserDetailsService {
-    MemberRopository memberRopository;
+    PasswordEncoder passwordEncoder;
+    MemberRepository memberRepository; // 이게 DAO임
 
-    public MemberDetailsService(MemberRopository memberRopository) {
-        this.memberRopository = memberRopository;
+    public MemberDetailsService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+        this.memberRepository = memberRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
-            Member member = memberRopository.findByEmail(username);
+            Member member = memberRepository.findByEmail(username);
             List<GrantedAuthority> authorities = new ArrayList<>();
             authorities.add(new SimpleGrantedAuthority(member.getRole().name()));
 
             return new User(member.getEmail(), member.getPassword(), authorities);
         } catch (Exception e) {
-             throw new UsernameNotFoundException(String.format("Username %s not found", username));
+            throw new UsernameNotFoundException(String.format("Username %s not found", username));
         }
+    }
+
+    public void saveMember(Member member) {
+        member.setPassword(passwordEncoder.encode(member.getPassword()));
+        memberRepository.save(member);
     }
 }

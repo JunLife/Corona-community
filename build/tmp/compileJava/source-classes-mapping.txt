@@ -1,26 +1,32 @@
-com/community/app/utilities/MemberDetailsService.java
- com.community.app.utilities.MemberDetailsService
+com/community/app/service/JWTUtil.java
+ com.community.app.service.JWTUtil
 com/community/app/jwt/JWTAuthenticationRequest.java
  com.community.app.jwt.JWTAuthenticationRequest
-com/community/app/model/Member.java
- com.community.app.model.Member
-com/community/app/utilities/JWTUtil.java
- com.community.app.utilities.JWTUtil
+com/community/app/config/Role.java
+ com.community.app.config.Role
+com/community/app/service/CookieUtil.java
+ com.community.app.service.CookieUtil
 com/community/app/config/CrytoConfig.java
  com.community.app.config.CrytoConfig
-com/community/app/config/SecurityConfig.java
- com.community.app.config.SecurityConfig
+com/community/app/AppApplication.java
+ com.community.app.AppApplication
 com/community/app/jwt/JWTUsernameAndPasswordAuthenticationFilter.java
  com.community.app.jwt.JWTUsernameAndPasswordAuthenticationFilter
 com/community/app/jwt/JWTRequestFilter.java
  com.community.app.jwt.JWTRequestFilter
-com/community/app/utilities/CookieUtil.java
- com.community.app.utilities.CookieUtil
-com/community/app/AppApplication.java
- com.community.app.AppApplication
-com/community/app/repository/MemberRopository.java
- com.community.app.repository.MemberRopository
+com/community/app/model/Member.java
+ com.community.app.model.Member
+com/community/app/repository/MemberRepository.java
+ com.community.app.repository.MemberRepository
+com/community/app/repository/PostRepository.java
+ com.community.app.repository.PostRepository
+com/community/app/service/MemberDetailsService.java
+ com.community.app.service.MemberDetailsService
+com/community/app/config/SecurityConfig.java
+ com.community.app.config.SecurityConfig
+com/community/app/model/Post.java
+ com.community.app.model.Post
 com/community/app/controller/RestApiController.java
  com.community.app.controller.RestApiController
-com/community/app/config/Role.java
- com.community.app.config.Role
+com/community/app/service/PostService.java
+ com.community.app.service.PostService

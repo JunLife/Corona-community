@@ -1,7 +1,7 @@
 package com.community.app.jwt;
 
-import com.community.app.utilities.CookieUtil;
-import com.community.app.utilities.JWTUtil;
+import com.community.app.service.CookieUtil;
+import com.community.app.service.JWTUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,7 +34,7 @@ public class JWTUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                     .readValue(request.getInputStream(), JWTAuthenticationRequest.class);
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(
-                    authenticationRequest.getUsername(),
+                    authenticationRequest.getEmail(),
                     authenticationRequest.getPassword()
             );
 

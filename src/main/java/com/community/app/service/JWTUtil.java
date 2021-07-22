@@ -1,4 +1,4 @@
-package com.community.app.utilities;
+package com.community.app.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -9,10 +9,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
-import java.util.Collection;
 import java.util.Date;
 
 @ConfigurationProperties(prefix = "application.jwt")
