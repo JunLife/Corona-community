@@ -4,6 +4,8 @@ import PageNotFound from './section-views/PageNotFound';
 import Korea_info from './section-views/Korea_info';
 import Info_by_city from './section-views/Info_by_city';
 import Home from './section-views/Home';
+import Login from './section-views/Login';
+import Signup from './section-views/Signup';
 
 const Section = () => {
   return (
@@ -21,6 +23,8 @@ const Section = () => {
         <Route exact path="/profile">
           profile
         </Route>
+        <Route exact path="/login" component={Login}></Route>
+        <Route exact path="/signup" component={Signup}></Route>
         <Route component={PageNotFound}></Route>
       </Switch>
     </div>

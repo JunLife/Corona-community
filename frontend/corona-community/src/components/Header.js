@@ -6,6 +6,7 @@ import {
   FormControl,
   Button,
 } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   return (
@@ -19,6 +20,11 @@ const Header = () => {
           />
           <Button variant="outline-primary">Search</Button>
         </Form>
+      </div>
+      <div className="login_button">
+        <Link to="/login" className="link">
+          <Button variant="primary">로그인</Button>
+        </Link>
       </div>
       {/* <div className="toggle">
         <NavDropdown title="Dropdown" id="basic-nav-dropdown">
