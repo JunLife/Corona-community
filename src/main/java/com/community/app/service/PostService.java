@@ -1,5 +1,6 @@
 package com.community.app.service;
 
+import com.community.app.exception.ApiRequestException;
 import com.community.app.model.Member;
 import com.community.app.model.Post;
 import com.community.app.repository.MemberRepository;
@@ -12,12 +13,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.Date;
+import java.util.List;
 
 @ConfigurationProperties(prefix = "application.file")
 @Setter
 @Getter
 @Service
 public class PostService {
+
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
     private String path;
@@ -27,8 +30,8 @@ public class PostService {
         this.memberRepository = memberRepository;
     }
 
-    public void save(Post post, String userEmail, MultipartFile file) throws Exception {
-        Member member = memberRepository.findByEmail(userEmail);
+    public void save(Post post, String memberEmail, MultipartFile file) throws Exception {
+        Member member = memberRepository.findByEmail(memberEmail);
         post.setMember(member);
         if (!file.isEmpty()) {
             try {
@@ -38,10 +41,14 @@ public class PostService {
 
                 post.setPhotoName(fileName);
             } catch (Exception e) {
-                throw new Exception("failed to upload file");
+                throw new ApiRequestException("failed to upload file");
             }
         }
 
         postRepository.save(post);
+    }
+
+    public Member findMemberByPostId(Long id) {
+        return postRepository.findById(id).get().getMember();
     }
 }

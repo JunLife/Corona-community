@@ -1,5 +1,7 @@
 package com.community.app.jwt;
 
+import com.community.app.exception.ApiException;
+import com.community.app.exception.ApiRequestException;
 import com.community.app.service.CookieUtil;
 import com.community.app.service.JWTUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,7 +45,7 @@ public class JWTUsernameAndPasswordAuthenticationFilter extends UsernamePassword
             return authenticate;
 
         } catch (Exception e) {
-            throw new RuntimeException("Failed At AttemptAuthentication");
+            throw new ApiRequestException("Failed At AttemptAuthentication");
         }
     }
 

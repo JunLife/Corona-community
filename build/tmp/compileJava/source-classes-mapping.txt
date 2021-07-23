@@ -18,14 +18,20 @@ com/community/app/model/Member.java
  com.community.app.model.Member
 com/community/app/repository/MemberRepository.java
  com.community.app.repository.MemberRepository
-com/community/app/repository/PostRepository.java
- com.community.app.repository.PostRepository
-com/community/app/service/MemberDetailsService.java
- com.community.app.service.MemberDetailsService
-com/community/app/config/SecurityConfig.java
- com.community.app.config.SecurityConfig
 com/community/app/model/Post.java
  com.community.app.model.Post
+com/community/app/exception/ApiException.java
+ com.community.app.exception.ApiException
+com/community/app/service/MemberDetailsService.java
+ com.community.app.service.MemberDetailsService
+com/community/app/exception/ApiExceptionHandler.java
+ com.community.app.exception.ApiExceptionHandler
+com/community/app/config/SecurityConfig.java
+ com.community.app.config.SecurityConfig
+com/community/app/exception/ApiRequestException.java
+ com.community.app.exception.ApiRequestException
+com/community/app/repository/PostRepository.java
+ com.community.app.repository.PostRepository
 com/community/app/controller/RestApiController.java
  com.community.app.controller.RestApiController
 com/community/app/service/PostService.java
