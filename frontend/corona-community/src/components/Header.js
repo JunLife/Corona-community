@@ -7,6 +7,8 @@ import {
   Button,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { isLogined } from '../utiles/AuthUtil';
+import { doLogout } from '../api/AuthApi';
 
 const Header = () => {
   return (
@@ -21,20 +23,26 @@ const Header = () => {
           <Button variant="outline-primary">Search</Button>
         </Form>
       </div>
-      <div className="login_button">
-        <Link to="/login" className="link">
-          <Button variant="primary">로그인</Button>
-        </Link>
-      </div>
-      {/* <div className="toggle">
-        <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-          <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.2">Another</NavDropdown.Item>
-          <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-          <NavDropdown.Divider />
-          <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
-        </NavDropdown>
-      </div> */}
+
+      {isLogined() ? (
+        <div className="toggle">
+          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.2">Another</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action/3.4" onClick={doLogout}>
+              Logout
+            </NavDropdown.Item>
+          </NavDropdown>
+        </div>
+      ) : (
+        <div className="login_button">
+          <Link to="/login" className="link">
+            <Button variant="primary">로그인</Button>
+          </Link>
+        </div>
+      )}
     </Navbar>
   );
 };

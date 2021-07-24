@@ -7,6 +7,7 @@ const Signup = () => {
 
   const onChangePassword = e => {
     setPassword(e.target.value);
+    console.log(password);
   };
 
   const checkPassword = e => {
@@ -55,7 +56,6 @@ const Signup = () => {
               placeholder="Password"
               className="password"
               onChange={onChangePassword}
-              value={password}
             />
           </Form.Group>
 
