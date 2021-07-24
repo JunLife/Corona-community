@@ -1,13 +1,13 @@
-##코로나19 커뮤니티 사이트
+<h2>코로나19 커뮤니티 사이트</h2>
 <hr>
 
-###Tools
+<h3>Tools:</h3>
 > Backend
 > 
-> * JDK 14 <br>
-> * Spring Boot <br>
-> * Spring Security <br>
-> * Spring Data JPA <br>
+> * JDK 14
+> * Spring Boot
+> * Spring Security
+> * Spring Data JPA
 >
 > 
 > Frontend
@@ -17,9 +17,9 @@
 > * React-Bootstrap
 > * React-Chart.js
 
+<br><hr><br>
 
-
-###넣을 기능 리스트: 
+<h3>넣을 기능 리스트:</h3>
 * 코로나 현황: <br>
 > 0. 이메일 로그인, 로그아웃 (o)
 > 1. 당일 확진자 수
