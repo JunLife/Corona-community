@@ -11,6 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
 import java.util.Date;
 
 @ConfigurationProperties(prefix = "application.jwt")
@@ -18,18 +19,23 @@ import java.util.Date;
 @Setter
 @Getter
 public class JWTUtil {
-    private Long accessTokenExpiration;
+    private int accessTokenExpiration;
     private String secretKey;
     private String accessTokenName;
 
     public String generateToken(Authentication authResult) {
         Date now = new Date();
+        System.out.println(now);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
+        calendar.add(Calendar.DATE, accessTokenExpiration);
+        System.out.println(calendar.getTime());
 
         return Jwts.builder()
                 .setSubject(authResult.getName())
                 .claim("authorities", authResult.getAuthorities())
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + accessTokenExpiration))
+                .setExpiration(calendar.getTime())
                 .signWith(Keys.hmacShaKeyFor(secretKey.getBytes()), SignatureAlgorithm.HS256)
                 .compact();
     }

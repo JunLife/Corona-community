@@ -18,20 +18,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
     private final PasswordEncoder passwordEncoder;
     private final CookieUtil cookieUtil;
     private final JWTUtil jwtUtil;
     private final MemberDetailsService memberDetailsService;
 
     public SecurityConfig(PasswordEncoder passwordEncoder,
-                          MemberDetailsService memberDetailsService,
+                          CookieUtil cookieUtil,
                           JWTUtil jwtUtil,
-                          CookieUtil cookieUtil, MemberDetailsService memberDetailsService1) {
+                          MemberDetailsService memberDetailsService) {
         this.passwordEncoder = passwordEncoder;
-        this.memberDetailsService = memberDetailsService1;
         this.cookieUtil = cookieUtil;
         this.jwtUtil = jwtUtil;
+        this.memberDetailsService = memberDetailsService;
     }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -44,14 +46,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/", "/signup", "/login").permitAll()
                     .antMatchers("/adminTest").hasAuthority(Role.ROLE_ADMIN.name())
-                    .anyRequest().authenticated()
+//                    .anyRequest().authenticated()
+                    .anyRequest().permitAll()
                     .and()
                 .formLogin()
                     .disable()
                 .logout()
-                    .deleteCookies(jwtUtil.getAccessTokenName())
-                    .logoutSuccessUrl("/")
-                    .and()
+                    .disable()
                 .addFilter(new JWTUsernameAndPasswordAuthenticationFilter(authenticationManager(), jwtUtil, cookieUtil))
                 .addFilterBefore(
                         new JWTRequestFilter(jwtUtil, cookieUtil),
@@ -60,7 +61,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    protected void configure(AuthenticationManagerBuilder auth) {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
 

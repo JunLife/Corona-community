@@ -9,6 +9,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.servlet.FilterChain;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class JWTUsernameAndPasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
     private final AuthenticationManager authenticationManager;
     private final JWTUtil jwtUtil;
     private final CookieUtil cookieUtil ;
@@ -30,7 +32,7 @@ public class JWTUsernameAndPasswordAuthenticationFilter extends UsernamePassword
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
-                                                HttpServletResponse response) throws AuthenticationException {
+                                                HttpServletResponse response) {
         try {
             JWTAuthenticationRequest authenticationRequest = new ObjectMapper()
                     .readValue(request.getInputStream(), JWTAuthenticationRequest.class);
@@ -56,6 +58,8 @@ public class JWTUsernameAndPasswordAuthenticationFilter extends UsernamePassword
                                             Authentication authResult) throws IOException, ServletException {
         String accessToken = jwtUtil.generateToken(authResult);
         response.addCookie(cookieUtil.createAccessCookie(accessToken));
+
+        SecurityContextHolder.getContext().setAuthentication(authResult);
 
         chain.doFilter(request, response);
     }

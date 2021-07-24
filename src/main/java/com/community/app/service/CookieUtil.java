@@ -16,9 +16,17 @@ public class CookieUtil {
         this.jwtUtil = jwtUtil;
     }
 
+    public Cookie removeCookie() {
+        Cookie token = new Cookie(jwtUtil.getAccessTokenName(), "");
+        token.setMaxAge(1);
+        token.setHttpOnly(true);
+        token.setPath("/");
+        return token;
+    }
+
     public Cookie createAccessCookie(String jws) {
         Cookie token = new Cookie(jwtUtil.getAccessTokenName(), jws);
-        token.setMaxAge(jwtUtil.getAccessTokenExpiration().intValue());
+        token.setMaxAge(jwtUtil.getAccessTokenExpiration() * 60 * 60 * 24);
         token.setHttpOnly(true);
         token.setPath("/");
         return token;

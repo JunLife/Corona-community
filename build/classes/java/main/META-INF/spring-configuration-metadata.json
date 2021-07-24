@@ -19,7 +19,7 @@
     },
     {
       "name": "application.jwt.access-token-expiration",
-      "type": "java.lang.Long",
+      "type": "java.lang.Integer",
       "sourceType": "com.community.app.service.JWTUtil"
     },
     {

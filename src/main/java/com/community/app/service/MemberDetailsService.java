@@ -18,12 +18,10 @@ import java.util.List;
 @Service
 public class MemberDetailsService implements UserDetailsService {
 
-    PasswordEncoder passwordEncoder;
-    MemberRepository memberRepository; // 이게 DAO임
+    MemberRepository memberRepository;
 
-    public MemberDetailsService(MemberRepository memberRepository, PasswordEncoder passwordEncoder) {
+    public MemberDetailsService(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -37,24 +35,5 @@ public class MemberDetailsService implements UserDetailsService {
         } catch (Exception e) {
             throw new ApiRequestException(String.format("userEmail %s not found", userEmail));
         }
-    }
-
-    public void signup(Member member) {
-        checkMember(member);
-
-        member.setPassword(passwordEncoder.encode(member.getPassword()));
-        memberRepository.save(member);
-    }
-
-    private void checkMember(Member member) {
-        Member existMember = memberRepository.findByEmail(member.getEmail());
-
-        if (existMember != null) {
-            throw new ApiRequestException("Email Already Exists");
-        }
-    }
-
-    public Member getMemberByUserEmail(String userEmail) {
-        return memberRepository.findByEmail(userEmail);
     }
 }

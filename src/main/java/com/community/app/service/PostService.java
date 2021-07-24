@@ -30,25 +30,31 @@ public class PostService {
         this.memberRepository = memberRepository;
     }
 
-    public void save(Post post, String memberEmail, MultipartFile file) throws Exception {
-        Member member = memberRepository.findByEmail(memberEmail);
-        post.setMember(member);
-        if (!file.isEmpty()) {
-            try {
+    public void save(Post post, String memberEmail, MultipartFile file) {
+        try {
+            Member member = memberRepository.findByEmail(memberEmail);
+            post.setMember(member);
+
+            if (!file.isEmpty()) {
                 String fileName = new Date().getTime() + "_" + file.getOriginalFilename();
                 File dest = new File(path + fileName);
                 file.transferTo(dest);
 
                 post.setPhotoName(fileName);
-            } catch (Exception e) {
-                throw new ApiRequestException("failed to upload file");
             }
-        }
 
-        postRepository.save(post);
+            postRepository.save(post);
+        } catch (Exception e) {
+            throw new ApiRequestException("failed to upload post");
+        }
     }
 
-    public Member findMemberByPostId(Long id) {
-        return postRepository.findById(id).get().getMember();
+    public List<Post> getPostsByMemberEmail(String memberEmail) {
+        Long memberId = memberRepository.findByEmail(memberEmail).getId();
+        return postRepository.findAllByMemberId(memberId);
+    }
+
+    public void test() {
+        throw new ApiRequestException("test");
     }
 }
