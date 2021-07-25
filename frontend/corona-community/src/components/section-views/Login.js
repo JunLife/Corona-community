@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { doLogin } from '../../api/AuthApi';
-import { isLogined } from '../../utiles/AuthUtil';
+import { doLogin } from '../../auth/AuthApi';
+import { isLogined } from '../../auth/AuthUtil';
 
 const Login = props => {
   const [email, setEmail] = useState('');
@@ -34,7 +34,7 @@ const Login = props => {
 
     if (regExp.test(email) && isLogined()) {
       props.history.push('/');
-      window.location.reload();
+
       return;
     }
 

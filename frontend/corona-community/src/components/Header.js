@@ -7,8 +7,8 @@ import {
   Button,
 } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { isLogined } from '../utiles/AuthUtil';
-import { doLogout } from '../api/AuthApi';
+import { isLogined } from '../auth/AuthUtil';
+import { doLogout } from '../auth/AuthApi';
 
 const Header = () => {
   return (

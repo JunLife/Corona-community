@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { isLogined } from '../../utiles/AuthUtil';
+import React from 'react';
 
 const Home = () => {
   return (
