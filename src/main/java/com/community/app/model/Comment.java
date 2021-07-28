@@ -17,10 +17,6 @@ public class Comment {
     private Date date;
 
     @ManyToOne
-    @JoinColumn(name = "post_id")
-    private Post post;
-
-    @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 }

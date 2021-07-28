@@ -8,6 +8,7 @@ import Login from './section-views/Login';
 import Signup from './section-views/Signup';
 import Post from './section-views/Post';
 import Profile from './section-views/Profile';
+import Board from './section-views/Board';
 
 const Section = () => {
   return (
@@ -16,9 +17,7 @@ const Section = () => {
         <Route exact path="/" component={Home}></Route>
         <Route exact path="/korea_info" component={KoreaInfo}></Route>
         <Route exact path="/info_by_city" component={CityInfo}></Route>
-        <Route exact path="/board">
-          board
-        </Route>
+        <Route exact path="/board" component={Board}></Route>
         <Route exact path="/post" component={Post}></Route>
         <Route exact path="/profile" component={Profile}></Route>
         <Route exact path="/login" component={Login}></Route>

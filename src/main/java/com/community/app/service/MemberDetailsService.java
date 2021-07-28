@@ -35,4 +35,8 @@ public class MemberDetailsService implements UserDetailsService {
             throw new ApiRequestException(String.format("userEmail %s not found", userEmail));
         }
     }
+
+    public Member getMemberByEmail(String email) {
+        return memberRepository.findByEmail(email);
+    }
 }

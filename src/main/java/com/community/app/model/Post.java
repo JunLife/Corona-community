@@ -2,9 +2,12 @@ package com.community.app.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Getter
@@ -19,8 +22,9 @@ public class Post {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    @Column(nullable = false, updatable = false, insertable = false,
+            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Timestamp createdDate;
 
     @Column(nullable = false)
     private String title;
@@ -31,4 +35,11 @@ public class Post {
 
     @Column(length = 128)
     private String photoName;
+
+    @Column(nullable = false)
+    private int recommend = 0;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "comment_id")
+    private Collection<Comment> comments;
 }

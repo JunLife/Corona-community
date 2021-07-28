@@ -39,14 +39,14 @@ public class AuthService {
     }
 
     public void signup(Member member) {
-        checkMember(member);
+        checkMember(member.getEmail());
 
         member.setPassword(passwordEncoder.encode(member.getPassword()));
         memberRepository.save(member);
     }
 
-    private void checkMember(Member member) {
-        Member existMember = memberRepository.findByEmail(member.getEmail());
+    public void checkMember(String memberEmail) {
+        Member existMember = memberRepository.findByEmail(memberEmail);
 
         if (existMember != null) {
             throw new ApiRequestException("Email Already Exists");

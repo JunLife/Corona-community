@@ -25,11 +25,9 @@ public class JWTUtil {
 
     public String generateToken(Authentication authResult) {
         Date now = new Date();
-        System.out.println(now);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(now);
         calendar.add(Calendar.DATE, accessTokenExpiration);
-        System.out.println(calendar.getTime());
 
         return Jwts.builder()
                 .setSubject(authResult.getName())

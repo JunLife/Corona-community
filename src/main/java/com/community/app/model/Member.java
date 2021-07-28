@@ -3,6 +3,7 @@ package com.community.app.model;
 import com.community.app.config.Role;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -23,7 +24,7 @@ public class Member {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 16)
-    private Role role;
+    private Role role = Role.ROLE_MEMBER;
 
     @Column(length = 16)
     private String phoneNumber;

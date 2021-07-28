@@ -1,25 +1,31 @@
-com/community/app/config/Role.java
- com.community.app.config.Role
+com/community/app/service/JWTUtil.java
+ com.community.app.service.JWTUtil
 com/community/app/jwt/JWTAuthenticationRequest.java
  com.community.app.jwt.JWTAuthenticationRequest
 com/community/app/exception/ApiException.java
  com.community.app.exception.ApiException
-com/community/app/service/PostService.java
- com.community.app.service.PostService
-com/community/app/service/JWTUtil.java
- com.community.app.service.JWTUtil
+com/community/app/jwt/JWTRequestFilter.java
+ com.community.app.jwt.JWTRequestFilter
+com/community/app/config/SecurityConfig.java
+ com.community.app.config.SecurityConfig
+com/community/app/jwt/JWTUsernameAndPasswordAuthenticationFilter.java
+ com.community.app.jwt.JWTUsernameAndPasswordAuthenticationFilter
 com/community/app/exception/ApiRequestException.java
  com.community.app.exception.ApiRequestException
 com/community/app/repository/PostRepository.java
  com.community.app.repository.PostRepository
-com/community/app/AppApplication.java
- com.community.app.AppApplication
+com/community/app/config/Role.java
+ com.community.app.config.Role
+com/community/app/service/CookieUtil.java
+ com.community.app.service.CookieUtil
 com/community/app/repository/MemberRepository.java
  com.community.app.repository.MemberRepository
-com/community/app/model/Comment.java
- com.community.app.model.Comment
-com/community/app/model/Post.java
- com.community.app.model.Post
+com/community/app/controller/AuthRestController.java
+ com.community.app.controller.AuthRestController
+com/community/app/AppApplication.java
+ com.community.app.AppApplication
+com/community/app/service/AuthService.java
+ com.community.app.service.AuthService
 com/community/app/service/MemberDetailsService.java
  com.community.app.service.MemberDetailsService
 com/community/app/model/Member.java
@@ -28,15 +34,13 @@ com/community/app/config/CrytoConfig.java
  com.community.app.config.CrytoConfig
 com/community/app/exception/ApiExceptionHandler.java
  com.community.app.exception.ApiExceptionHandler
-com/community/app/service/AuthService.java
- com.community.app.service.AuthService
-com/community/app/service/CookieUtil.java
- com.community.app.service.CookieUtil
-com/community/app/jwt/JWTUsernameAndPasswordAuthenticationFilter.java
- com.community.app.jwt.JWTUsernameAndPasswordAuthenticationFilter
-com/community/app/jwt/JWTRequestFilter.java
- com.community.app.jwt.JWTRequestFilter
-com/community/app/controller/RestApiController.java
- com.community.app.controller.RestApiController
-com/community/app/config/SecurityConfig.java
- com.community.app.config.SecurityConfig
+com/community/app/model/Comment.java
+ com.community.app.model.Comment
+com/community/app/model/Post.java
+ com.community.app.model.Post
+com/community/app/controller/MyRestController.java
+ com.community.app.controller.MyRestController
+com/community/app/service/PostService.java
+ com.community.app.service.PostService
+com/community/app/controller/BoardRestController.java
+ com.community.app.controller.BoardRestController
