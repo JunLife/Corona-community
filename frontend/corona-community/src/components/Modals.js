@@ -48,11 +48,11 @@ const MyModalTech = props => {
         </div>
         <div>
           <span className="bold">Frontend) </span>
-          React.js + React-Router-Dom + React-Bootstrap + React-chartjs-2 + HTML
-          + CSS
+          React.js + React-Bootstrap + React-chartjs-2 + HTML + CSS
         </div>
         <div>
-          <span className="bold">Backend) </span> Spring Boot
+          <span className="bold">Backend) </span> Spring Boot + Spring Security
+          + JPA
         </div>
         <div>
           <span className="bold">API) </span>

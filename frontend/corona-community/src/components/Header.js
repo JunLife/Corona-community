@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Navbar,
   NavDropdown,
@@ -7,11 +7,22 @@ import {
   Button,
   Image,
 } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { isLogined } from '../auth/AuthUtil';
 import { doLogout } from '../auth/AuthApi';
 
-const Header = () => {
+const Header = props => {
+  const history = useHistory();
+  const [keyword, setKeyword] = useState('');
+
+  const onChangeKeyword = e => {
+    setKeyword(e.target.value);
+  };
+
+  const search = () => {
+    history.push('/board');
+  };
+
   const getUsername = () => {
     const email = localStorage.getItem('email');
     return email.split('@')[0];
@@ -25,8 +36,11 @@ const Header = () => {
             type="text"
             placeholder="Post Search"
             className="search-text"
+            onChange={onChangeKeyword}
           />
-          <Button variant="outline-primary">Search</Button>
+          <Button variant="outline-primary" onClick={search}>
+            Search
+          </Button>
         </Form>
       </div>
 

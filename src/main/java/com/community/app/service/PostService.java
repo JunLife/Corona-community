@@ -14,6 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -51,11 +57,6 @@ public class PostService {
         }
     }
 
-    public List<Post> getPostsByMemberEmail(String memberEmail) {
-        Long memberId = memberRepository.findByEmail(memberEmail).getId();
-        return postRepository.findAllByMemberId(memberId);
-    }
-
     public Page<Post> findAll(Pageable pageable) {
         Page<Post> posts = postRepository.findAll(pageable);
 
@@ -67,5 +68,38 @@ public class PostService {
         });
 
         return posts;
+    }
+
+    public Post findById(Long id) {
+        try {
+            Post post = postRepository.findById(id).get();
+            Member member = post.getMember();
+            member.setPassword(null);
+            post.setMember(member);
+
+            if (post.getPhotoName() != null) {
+                post.setPhotoData(getEncodedPhoto(post.getPhotoName()));
+            }
+
+            return post;
+        } catch (ApiRequestException e) {
+            throw new ApiRequestException("Post Not Found");
+        }
+    }
+
+    private String getEncodedPhoto(String photoName) {
+        try {
+            byte[] bytes = Files.readAllBytes(Paths.get(path + photoName));
+            byte[] base64 = Base64.getEncoder().encode(bytes);
+
+            return new String(base64, StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new ApiRequestException("Photo Not Found");
+        }
+    }
+
+    public List<Post> getPostsByMemberEmail(String memberEmail) {
+        Long memberId = memberRepository.findByEmail(memberEmail).getId();
+        return postRepository.findAllByMemberId(memberId);
     }
 }

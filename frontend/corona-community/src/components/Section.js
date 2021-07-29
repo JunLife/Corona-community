@@ -9,6 +9,7 @@ import Signup from './section-views/Signup';
 import Post from './section-views/Post';
 import Profile from './section-views/Profile';
 import Board from './section-views/Board';
+import BoardDetail from './section-views/BoardDetail';
 
 const Section = () => {
   return (
@@ -22,6 +23,7 @@ const Section = () => {
         <Route exact path="/profile" component={Profile}></Route>
         <Route exact path="/login" component={Login}></Route>
         <Route exact path="/signup" component={Signup}></Route>
+        <Route exact path="/board/detail/:id" component={BoardDetail}></Route>
         <Route component={PageNotFound}></Route>
       </Switch>
     </div>

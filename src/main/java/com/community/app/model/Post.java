@@ -42,4 +42,6 @@ public class Post {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "comment_id")
     private Collection<Comment> comments;
+
+    private String photoData;
 }

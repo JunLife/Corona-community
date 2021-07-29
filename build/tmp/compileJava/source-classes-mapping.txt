@@ -38,9 +38,9 @@ com/community/app/model/Comment.java
  com.community.app.model.Comment
 com/community/app/model/Post.java
  com.community.app.model.Post
-com/community/app/controller/MyRestController.java
- com.community.app.controller.MyRestController
 com/community/app/service/PostService.java
  com.community.app.service.PostService
-com/community/app/controller/BoardRestController.java
- com.community.app.controller.BoardRestController
+com/community/app/controller/MyRestController.java
+ com.community.app.controller.MyRestController
+com/community/app/controller/BoardAndPostRestController.java
+ com.community.app.controller.BoardAndPostRestController

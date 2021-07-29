@@ -13,17 +13,27 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-public class BoardRestController {
+public class BoardAndPostRestController {
 
     private PostService postService;
 
-    public BoardRestController(PostService postService) {
+    public BoardAndPostRestController(PostService postService) {
         this.postService = postService;
     }
 
     @GetMapping(path = "/board")
-    public Page<Post> getPosts(Pageable pageable) {
+    public Page<Post> getBoard(Pageable pageable) {
         return postService.findAll(pageable);
+    }
+
+    @GetMapping(path = "/board/search")
+    public Page<Post> searchBoard(Pageable pageable, String keyword) {
+        return null;
+    }
+
+    @GetMapping(path = "/board/detail/{id}")
+    public Post getPost(@PathVariable("id") Long id) {
+        return postService.findById(id);
     }
 
     @GetMapping(path = "/posts/{memberEmail}")
@@ -41,12 +51,5 @@ public class BoardRestController {
         postService.save(post, memberEmail, file);
         return new ResponseEntity(HttpStatus.CREATED);
     }
-
-    @GetMapping(path = "/post/{postId}/")
-    public HttpEntity getPost(@PathVariable("postId") Long postId) {
-
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
 }
 
