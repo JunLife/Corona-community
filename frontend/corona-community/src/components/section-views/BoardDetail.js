@@ -1,4 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import {
+  InputGroup,
+  FormControl,
+  Button,
+  Card,
+  ListGroup,
+} from 'react-bootstrap';
 import Loading from '../Loading';
 
 const BoardDetail = props => {
@@ -34,7 +41,22 @@ const BoardDetail = props => {
     setCreatedDate(getCreatedDate(data['createdDate']));
     setImageData(data['photoData']);
     setImageName(data['photoName']);
-    console.log(imageName + ' ' + imageData);
+  };
+
+  const getComments = () => {
+    const commentsRender = comments.map(item => (
+      <ListGroup.Item className="comment_item">
+        <div className="comment_email">
+          {getUsername(item['member']['email'])}
+        </div>
+        <div className="comment_text">{item['text']}</div>
+        <div className="comment_date">
+          {getCreatedDate(item['createdDate'])}
+        </div>
+      </ListGroup.Item>
+    ));
+
+    return <ListGroup>{commentsRender}</ListGroup>;
   };
 
   useEffect(async () => {
@@ -74,6 +96,7 @@ const BoardDetail = props => {
           )}
         </div>
       </div>
+
       <div className="board_body">
         {imageName ? (
           <img
@@ -85,6 +108,18 @@ const BoardDetail = props => {
           <div></div>
         )}
         <div>{content}</div>
+      </div>
+
+      <div className="board_footer">
+        <div className="board_input_comment">
+          <InputGroup className="mb-3">
+            <FormControl placeholder="댓글을 입력하세요." />
+            <Button variant="outline-secondary" id="button-addon2">
+              완료
+            </Button>
+          </InputGroup>
+        </div>
+        {comments.length ? <div>{getComments()}</div> : <div></div>}
       </div>
     </div>
   );

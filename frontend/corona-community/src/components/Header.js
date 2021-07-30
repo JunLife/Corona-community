@@ -1,28 +1,10 @@
-import React, { useState } from 'react';
-import {
-  Navbar,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-  Image,
-} from 'react-bootstrap';
-import { Link, useHistory } from 'react-router-dom';
+import React from 'react';
+import { Navbar, NavDropdown, Button, Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { isLogined } from '../auth/AuthUtil';
 import { doLogout } from '../auth/AuthApi';
 
 const Header = props => {
-  const history = useHistory();
-  const [keyword, setKeyword] = useState('');
-
-  const onChangeKeyword = e => {
-    setKeyword(e.target.value);
-  };
-
-  const search = () => {
-    history.push('/board');
-  };
-
   const getUsername = () => {
     const email = localStorage.getItem('email');
     return email.split('@')[0];
@@ -30,20 +12,7 @@ const Header = props => {
 
   return (
     <Navbar bg="light" variant="light" className="header">
-      <div className="search">
-        <Form inline>
-          <FormControl
-            type="text"
-            placeholder="Post Search"
-            className="search-text"
-            onChange={onChangeKeyword}
-          />
-          <Button variant="outline-primary" onClick={search}>
-            Search
-          </Button>
-        </Form>
-      </div>
-
+      <div></div>
       {isLogined() ? (
         <div className="toggle">
           <NavDropdown title={getUsername()} id="basic-nav-dropdown">

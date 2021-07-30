@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Pagination, Table, NavDropdown, Button } from 'react-bootstrap';
+import {
+  Pagination,
+  Table,
+  NavDropdown,
+  Button,
+  Form,
+  FormControl,
+} from 'react-bootstrap';
 import Loading from '../Loading';
 
 const Board = props => {
@@ -9,6 +16,23 @@ const Board = props => {
   );
   const [totalPage, setTotalPage] = useState(100);
   const [pageData, setPageData] = useState('');
+  const [keyword, setKeyword] = useState('');
+
+  const onChangeKeyword = e => {
+    setKeyword(e.target.value);
+  };
+
+  const search = async () => {
+    console.log(keyword);
+    if (keyword) {
+      window.localStorage.setItem('keyword', keyword);
+      await fetchSearchData(1, keyword);
+      setKeyword('');
+      return;
+    }
+    await fetchData(1);
+    window.localStorage.setItem('keyword', '');
+  };
 
   const getUsername = email => {
     return email.split('@')[0];
@@ -55,9 +79,25 @@ const Board = props => {
     setTotalPage(data['totalPages']);
   };
 
+  const fetchSearchData = async (number, keyword) => {
+    const response = await fetch(
+      `/board/search?page=${number - 1}&size=${pageSize}&keyword=${keyword}`
+    );
+    const data = await response.json();
+
+    setPageData(JSON.stringify(data));
+    setTotalPage(data['totalPages']);
+  };
+
   const handleData = async number => {
     setActive(number);
     setPageData('');
+
+    if (window.localStorage.getItem('keyword')) {
+      await fetchSearchData(number, window.localStorage.getItem('keyword'));
+      return;
+    }
+
     await fetchData(number);
   };
 
@@ -99,6 +139,7 @@ const Board = props => {
   };
 
   useEffect(async () => {
+    window.localStorage.setItem('keyword', '');
     await fetchData(1);
   }, []);
 
@@ -111,24 +152,41 @@ const Board = props => {
       <div className="board_list">
         <div className="board_header">
           <h2>자유 게시판</h2>
+
           <div className="board_sub">
-            <NavDropdown title={pageSize + '개 표시'} id="dropdown">
-              <NavDropdown.Item onClick={() => changePageSize(5)}>
-                5개
-              </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => changePageSize(10)}>
-                10개
-              </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => changePageSize(30)}>
-                30개
-              </NavDropdown.Item>
-              <NavDropdown.Item onClick={() => changePageSize(50)}>
-                50개
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Button className="write" href="/post">
-              글쓰기
-            </Button>
+            <div className="search">
+              <Form inline>
+                <FormControl
+                  type="text"
+                  placeholder="Post Search"
+                  className="search-text"
+                  value={keyword}
+                  onChange={onChangeKeyword}
+                />
+                <Button variant="outline-primary" onClick={search}>
+                  Search
+                </Button>
+              </Form>
+            </div>
+            <div className="board_sub_right">
+              <NavDropdown title={pageSize + '개 표시'} id="dropdown">
+                <NavDropdown.Item onClick={() => changePageSize(5)}>
+                  5개
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => changePageSize(10)}>
+                  10개
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => changePageSize(30)}>
+                  30개
+                </NavDropdown.Item>
+                <NavDropdown.Item onClick={() => changePageSize(50)}>
+                  50개
+                </NavDropdown.Item>
+              </NavDropdown>
+              <Button className="write" href="/post">
+                글쓰기
+              </Button>
+            </div>
           </div>
         </div>
 

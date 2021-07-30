@@ -6,6 +6,7 @@ import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -39,9 +40,9 @@ public class Post {
     @Column(nullable = false)
     private int recommend = 0;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "comment_id")
-    private Collection<Comment> comments;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "post_id")
+    private List<Comment> comments = new ArrayList<>();
 
     private String photoData;
 }

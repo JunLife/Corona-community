@@ -121,8 +121,9 @@ body {
   padding-left: 2%;
 }
 
-.search {
-  width: 70%;
+.board_sub_right {
+  margin-right: 16px;
+  display: flex;
 }
 
 .search-text {
@@ -514,25 +515,27 @@ body {
   padding: 4px 0px 16px 16px;
   font-size: small;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .board_header h2 {
   font-weight: bolder;
   margin-bottom: 32px;
-  width: 83%;
+  width: 50%;
 }
 
 .board_sub {
-  width: 180px;
+  width: 100%;
   display: flex;
-  padding-top: 48px;
+  padding-top: 16px;
+  padding-bottom: 8px;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .board_sub #dropdown {
   padding-bottom: 0px;
   padding-right: 16px;
-  width: 101px;
 }
 
 .board_list {
@@ -569,7 +572,6 @@ tbody .list_item:hover {
   border-radius: 8px;
   background-color: var(--light);
   width: 100%;
-  min-height: 400px;
   height: 100%;
 }
 
@@ -610,6 +612,7 @@ tbody .list_item:hover {
   margin: 4px;
   display: flex;
   flex-direction: column;
+  min-height: 400px;
   width: 100%;
   height: 100%;
 }
@@ -618,6 +621,33 @@ tbody .list_item:hover {
   max-width: 700px;
   max-height: auto;
   margin-bottom: 16px;
+}
+
+.comment_item {
+  display: flex;
+  flex-direction: row;
+}
+
+.comment_email {
+  border-right: solid 2px var(--gray-light);
+  padding-right: 10%;
+  width: 15%;
+}
+
+.comment_text {
+  padding-left: 5%;
+  width: 60%;
+}
+
+.comment_date {
+  width: 25%;
+  border-left: solid 2px var(--gray-light);
+  padding-left: 5%;
+}
+
+.board_detail .board_footer {
+  padding: 24px 16px 0px 16px;
+  border-top: solid 1px var(--gray-light);
 }
 
 .login_button {

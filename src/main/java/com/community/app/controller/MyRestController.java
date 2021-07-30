@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MyRestController {
 
-    private final PostService postService;
     private final PostRepository postRepository;
     private final MemberDetailsService memberDetailsService;
 
-    public MyRestController(PostService postService, PostRepository postRepository, AuthService authService, MemberDetailsService memberDetailsService) {
-        this.postService = postService;
+    public MyRestController(PostRepository postRepository, MemberDetailsService memberDetailsService) {
         this.postRepository = postRepository;
         this.memberDetailsService = memberDetailsService;
     }

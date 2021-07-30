@@ -6,6 +6,8 @@ com/community/app/exception/ApiException.java
  com.community.app.exception.ApiException
 com/community/app/jwt/JWTRequestFilter.java
  com.community.app.jwt.JWTRequestFilter
+com/community/app/repository/CommentRepository.java
+ com.community.app.repository.CommentRepository
 com/community/app/config/SecurityConfig.java
  com.community.app.config.SecurityConfig
 com/community/app/jwt/JWTUsernameAndPasswordAuthenticationFilter.java
@@ -14,18 +16,10 @@ com/community/app/exception/ApiRequestException.java
  com.community.app.exception.ApiRequestException
 com/community/app/repository/PostRepository.java
  com.community.app.repository.PostRepository
-com/community/app/config/Role.java
- com.community.app.config.Role
-com/community/app/service/CookieUtil.java
- com.community.app.service.CookieUtil
-com/community/app/repository/MemberRepository.java
- com.community.app.repository.MemberRepository
 com/community/app/controller/AuthRestController.java
  com.community.app.controller.AuthRestController
-com/community/app/AppApplication.java
- com.community.app.AppApplication
-com/community/app/service/AuthService.java
- com.community.app.service.AuthService
+com/community/app/model/Comment.java
+ com.community.app.model.Comment
 com/community/app/service/MemberDetailsService.java
  com.community.app.service.MemberDetailsService
 com/community/app/model/Member.java
@@ -34,13 +28,25 @@ com/community/app/config/CrytoConfig.java
  com.community.app.config.CrytoConfig
 com/community/app/exception/ApiExceptionHandler.java
  com.community.app.exception.ApiExceptionHandler
-com/community/app/model/Comment.java
- com.community.app.model.Comment
+com/community/app/config/Role.java
+ com.community.app.config.Role
+com/community/app/AppApplication.java
+ com.community.app.AppApplication
+com/community/app/service/AuthService.java
+ com.community.app.service.AuthService
+com/community/app/service/CookieUtil.java
+ com.community.app.service.CookieUtil
+com/community/app/repository/MemberRepository.java
+ com.community.app.repository.MemberRepository
+com/community/app/controller/CommentRestController.java
+ com.community.app.controller.CommentRestController
+com/community/app/service/CommentService.java
+ com.community.app.service.CommentService
 com/community/app/model/Post.java
  com.community.app.model.Post
-com/community/app/service/PostService.java
- com.community.app.service.PostService
-com/community/app/controller/MyRestController.java
- com.community.app.controller.MyRestController
 com/community/app/controller/BoardAndPostRestController.java
  com.community.app.controller.BoardAndPostRestController
+com/community/app/controller/MyRestController.java
+ com.community.app.controller.MyRestController
+com/community/app/service/PostService.java
+ com.community.app.service.PostService

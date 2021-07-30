@@ -1,7 +1,9 @@
 package com.community.app.controller;
 
+import com.community.app.jwt.JWTAuthenticationRequest;
 import com.community.app.model.Post;
 import com.community.app.service.PostService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
@@ -10,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -28,7 +32,7 @@ public class BoardAndPostRestController {
 
     @GetMapping(path = "/board/search")
     public Page<Post> searchBoard(Pageable pageable, String keyword) {
-        return null;
+        return postService.findAllByKeyword(pageable, keyword);
     }
 
     @GetMapping(path = "/board/detail/{id}")
@@ -47,7 +51,6 @@ public class BoardAndPostRestController {
     public HttpEntity post(@RequestParam(name = "file", required = false) MultipartFile file,
                            String memberEmail,
                            Post post) {
-        System.out.println(memberEmail);
         postService.save(post, memberEmail, file);
         return new ResponseEntity(HttpStatus.CREATED);
     }

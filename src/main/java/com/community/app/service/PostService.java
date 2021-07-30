@@ -102,4 +102,17 @@ public class PostService {
         Long memberId = memberRepository.findByEmail(memberEmail).getId();
         return postRepository.findAllByMemberId(memberId);
     }
+
+    public Page<Post> findAllByKeyword(Pageable pageable, String keyword) {
+        Page<Post> posts = postRepository.findByTitleContainingIgnoreCase(pageable, keyword);
+
+        posts.stream().forEach(post -> {
+            Member member = post.getMember();
+            member.setPassword(null);
+            post.setMember(member);
+            post = post;
+        });
+
+        return posts;
+    }
 }

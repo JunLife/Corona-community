@@ -1,9 +1,16 @@
 package com.community.app.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
+@Getter
+@Setter
 public class Comment {
 
     @Id
@@ -13,8 +20,9 @@ public class Comment {
     @Column(nullable = false)
     private String text;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date date;
+    @Column(nullable = false, updatable = false, insertable = false,
+            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Timestamp createdDate;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
