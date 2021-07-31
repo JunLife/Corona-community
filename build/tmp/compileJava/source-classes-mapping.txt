@@ -8,8 +8,8 @@ com/community/app/AppApplication.java
  com.community.app.AppApplication
 com/community/app/repository/CommentRepository.java
  com.community.app.repository.CommentRepository
-com/community/app/config/SecurityConfig.java
- com.community.app.config.SecurityConfig
+com/community/app/controller/BoardAndPostRestController.java
+ com.community.app.controller.BoardAndPostRestController
 com/community/app/jwt/JWTUsernameAndPasswordAuthenticationFilter.java
  com.community.app.jwt.JWTUsernameAndPasswordAuthenticationFilter
 com/community/app/exception/ApiRequestException.java
@@ -20,8 +20,8 @@ com/community/app/controller/AuthRestController.java
  com.community.app.controller.AuthRestController
 com/community/app/model/Post.java
  com.community.app.model.Post
-com/community/app/service/MemberDetailsService.java
- com.community.app.service.MemberDetailsService
+com/community/app/service/PostService.java
+ com.community.app.service.PostService
 com/community/app/model/Member.java
  com.community.app.model.Member
 com/community/app/config/CrytoConfig.java
@@ -44,9 +44,9 @@ com/community/app/model/Comment.java
  com.community.app.model.Comment
 com/community/app/jwt/JWTRequestFilter.java
  com.community.app.jwt.JWTRequestFilter
+com/community/app/service/MemberDetailsService.java
+ com.community.app.service.MemberDetailsService
+com/community/app/config/SecurityConfig.java
+ com.community.app.config.SecurityConfig
 com/community/app/controller/MyRestController.java
  com.community.app.controller.MyRestController
-com/community/app/controller/BoardAndPostRestController.java
- com.community.app.controller.BoardAndPostRestController
-com/community/app/service/PostService.java
- com.community.app.service.PostService

@@ -25,7 +25,11 @@ const Header = () => {
             </NavDropdown.Item>
           </NavDropdown>
           <span>
-            <Image src="./avatar.png" roundedCircle className="header_avatar" />
+            {/* <Image src="./avatar.png" roundedCircle className="header_avatar" /> */}
+            <i
+              className="fas fa-user-circle"
+              style={{ fontSize: 'xx-large' }}
+            ></i>
           </span>
         </div>
       ) : (

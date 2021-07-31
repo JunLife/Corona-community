@@ -2,9 +2,7 @@ package com.community.app.controller;
 
 import com.community.app.model.Post;
 import com.community.app.repository.PostRepository;
-import com.community.app.service.AuthService;
 import com.community.app.service.MemberDetailsService;
-import com.community.app.service.PostService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +29,12 @@ public class MyRestController {
             postRepository.save(post);
         }
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/grade")
+    public String getGrade() {
+        String photoData = memberDetailsService.getEncodedPhoto();
+        return "{\"photo\": " + " \"" + photoData + "\"" + "}";
     }
 
     @GetMapping(path = "/adminTest")

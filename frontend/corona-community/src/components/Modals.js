@@ -1,7 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 const MyModalDev = props => {
+  const [grade, setGrade] = useState('');
+
+  useEffect(async () => {
+    const response = await fetch('/grade', {
+      method: 'GET',
+      mode: 'cors',
+    });
+    const data = await response.json();
+
+    setGrade(data['photo']);
+    console.log(grade);
+  }, []);
   return (
     <Modal
       {...props}
@@ -18,7 +30,11 @@ const MyModalDev = props => {
       <Modal.Body>
         <div className="modalBody">
           <h4>성적표</h4>
-          <img src="./grade.png" alt="성적표" className="img"></img>
+          <img
+            src={'data:image/jpg;charset=UTF-8;base64, ' + grade}
+            alt="성적표"
+            className="img"
+          ></img>
         </div>
       </Modal.Body>
       <Modal.Footer>
