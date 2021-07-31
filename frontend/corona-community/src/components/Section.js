@@ -6,10 +6,12 @@ import CityInfo from './section-views/CityInfo';
 import Home from './section-views/Home';
 import Login from './section-views/Login';
 import Signup from './section-views/Signup';
-import Post from './section-views/Post';
 import Profile from './section-views/Profile';
 import Board from './section-views/Board';
 import BoardDetail from './section-views/BoardDetail';
+import NewPost from './section-views/NewPost';
+import MyPosts from './section-views/MyPosts';
+import ModifyPost from './section-views/ModifyPost';
 
 const Section = () => {
   return (
@@ -19,11 +21,13 @@ const Section = () => {
         <Route exact path="/korea_info" component={KoreaInfo}></Route>
         <Route exact path="/info_by_city" component={CityInfo}></Route>
         <Route exact path="/board" component={Board}></Route>
-        <Route exact path="/post" component={Post}></Route>
+        <Route exact path="/post/new" component={NewPost}></Route>
         <Route exact path="/profile" component={Profile}></Route>
         <Route exact path="/login" component={Login}></Route>
         <Route exact path="/signup" component={Signup}></Route>
         <Route exact path="/board/detail/:id" component={BoardDetail}></Route>
+        <Route exact path="/my_posts" component={MyPosts}></Route>
+        <Route exact path="/modify_post/:id" component={ModifyPost}></Route>
         <Route component={PageNotFound}></Route>
       </Switch>
     </div>

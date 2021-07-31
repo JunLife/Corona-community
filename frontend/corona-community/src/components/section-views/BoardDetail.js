@@ -3,12 +3,14 @@ import {
   InputGroup,
   FormControl,
   Button,
-  Card,
+  CloseButton,
   ListGroup,
 } from 'react-bootstrap';
 import Loading from '../Loading';
+import { isLogined } from '../../auth/AuthUtil';
 
 const BoardDetail = props => {
+  const [postId, setPostId] = useState();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [imageName, setImageName] = useState([]);
@@ -17,6 +19,62 @@ const BoardDetail = props => {
   const [membername, setMembername] = useState('');
   const [createdDate, setCreatedDate] = useState('');
   const [imageData, setImageData] = useState('');
+  const [inputComment, setInputComment] = useState('');
+
+  const onChangeComment = e => {
+    setInputComment(e.target.value);
+  };
+
+  const doComment = async () => {
+    if (!isLogined()) {
+      props.history.push('/login');
+      alert('로그인을 해주세요.');
+    }
+
+    const data = {
+      email: window.localStorage.getItem('email'),
+      text: inputComment,
+      postId: postId,
+    };
+
+    const response = await fetch('/board/detail/comment', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (response.status !== 201) {
+      alert('잠시 후 시도해주세요.');
+      return;
+    }
+
+    setInputComment('');
+
+    await fetchData();
+  };
+
+  const removeComment = async (id, email) => {
+    if (window.localStorage.getItem('email') !== email) {
+      alert('자신의 댓글만 삭제할 수 있습니다.');
+      return;
+    }
+
+    const response = await fetch(`/board/detail/comment/${id}`, {
+      method: 'DELETE',
+      mode: 'cors',
+    });
+
+    if (response.status !== 200) {
+      alert('잠시 후 다시 시도해주세요.');
+      return;
+    }
+
+    alert('삭제가 완료되었습니다.');
+    await fetchData();
+  };
 
   const getUsername = email => {
     return email.split('@')[0];
@@ -41,6 +99,7 @@ const BoardDetail = props => {
     setCreatedDate(getCreatedDate(data['createdDate']));
     setImageData(data['photoData']);
     setImageName(data['photoName']);
+    setPostId(data['id']);
   };
 
   const getComments = () => {
@@ -52,6 +111,11 @@ const BoardDetail = props => {
         <div className="comment_text">{item['text']}</div>
         <div className="comment_date">
           {getCreatedDate(item['createdDate'])}
+        </div>
+        <div className="remove_comment">
+          <CloseButton
+            onClick={() => removeComment(item['id'], item['member']['email'])}
+          />
         </div>
       </ListGroup.Item>
     ));
@@ -107,14 +171,22 @@ const BoardDetail = props => {
         ) : (
           <div></div>
         )}
-        <div>{content}</div>
+        <div className="board_text">{content}</div>
       </div>
 
       <div className="board_footer">
         <div className="board_input_comment">
           <InputGroup className="mb-3">
-            <FormControl placeholder="댓글을 입력하세요." />
-            <Button variant="outline-secondary" id="button-addon2">
+            <FormControl
+              placeholder="댓글을 입력하세요."
+              value={inputComment}
+              onChange={onChangeComment}
+            />
+            <Button
+              variant="outline-secondary"
+              id="button-addon2"
+              onClick={doComment}
+            >
               완료
             </Button>
           </InputGroup>

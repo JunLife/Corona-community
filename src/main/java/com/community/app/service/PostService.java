@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -43,17 +42,15 @@ public class PostService {
             Member member = memberRepository.findByEmail(memberEmail);
             post.setMember(member);
 
-            if (!file.isEmpty()) {
-                String fileName = new Date().getTime() + "_" + file.getOriginalFilename();
-                File dest = new File(path + fileName);
-                file.transferTo(dest);
+            String fileName = createFile(file);
 
+            if (fileName != null) {
                 post.setPhotoName(fileName);
             }
 
             postRepository.save(post);
         } catch (Exception e) {
-            throw new ApiRequestException("failed to upload post");
+            throw new ApiRequestException("Failed To Upload Post");
         }
     }
 
@@ -70,7 +67,7 @@ public class PostService {
         return posts;
     }
 
-    public Post findById(Long id) {
+    public Post findPostById(Long id) {
         try {
             Post post = postRepository.findById(id).get();
             Member member = post.getMember();
@@ -114,5 +111,61 @@ public class PostService {
         });
 
         return posts;
+    }
+
+    public void deletePost(Long id) {
+        try {
+            String photoName = postRepository.findById(id).get().getPhotoName();
+            postRepository.deleteById(id);
+
+            deleteFile(photoName);
+
+        } catch (Exception e) {
+            throw new ApiRequestException("Fail To Delete");
+        }
+    }
+
+    public void modifyPost(Long id, MultipartFile file, String title, String text) {
+        try {
+            Post post = findPostById(id);
+
+            if (deleteFile(post.getPhotoName())) {
+                post.setPhotoName(null);
+            }
+
+            String fileName = createFile(file);
+
+            if (fileName != null) {
+                post.setPhotoName(fileName);
+            }
+            post.setTitle(title);
+            post.setText(text);
+            post.setPhotoData(null);
+
+            postRepository.save(post);
+        } catch (Exception e) {
+            throw new ApiRequestException("Failed To Modify Post");
+        }
+    }
+
+    private boolean deleteFile(String fileName) throws Exception {
+        File file = new File(path + fileName);
+
+        if (file.exists()) {
+            file.delete();
+            return true;
+        }
+        return false;
+    }
+
+    private String createFile(MultipartFile file) throws Exception {
+        if (file != null) {
+            String fileName = new Date().getTime() + "_" + file.getOriginalFilename();
+            File dest = new File(path + fileName);
+            file.transferTo(dest);
+
+            return fileName;
+        }
+        return null;
     }
 }

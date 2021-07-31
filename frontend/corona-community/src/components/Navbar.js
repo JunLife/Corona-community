@@ -20,7 +20,7 @@ const Navbar = () => {
         <Link to="/board" className="link">
           <li className="menu-item item">게시물</li>
         </Link>
-        <Link to="/post" className="link">
+        <Link to="/post/new" className="link">
           <li className="menu-item item">글쓰기</li>
         </Link>
         <Link to="/profile" className="link">

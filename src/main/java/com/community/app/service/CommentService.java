@@ -46,4 +46,12 @@ public class CommentService {
             throw new ApiRequestException("Fail To Save Comment");
         }
     }
+
+    public void removeComment(Long id) {
+        try {
+            commentRepository.deleteById(id);
+        } catch (ApiRequestException e) {
+            throw new ApiRequestException("Fail To Delete");
+        }
+    }
 }

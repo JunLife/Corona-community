@@ -40,7 +40,7 @@ public class Post {
     @Column(nullable = false)
     private int recommend = 0;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinColumn(name = "post_id")
     private List<Comment> comments = new ArrayList<>();
 

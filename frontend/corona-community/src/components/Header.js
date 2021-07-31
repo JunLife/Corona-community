@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { isLogined } from '../auth/AuthUtil';
 import { doLogout } from '../auth/AuthApi';
 
-const Header = props => {
+const Header = () => {
   const getUsername = () => {
     const email = localStorage.getItem('email');
     return email.split('@')[0];
@@ -16,9 +16,9 @@ const Header = props => {
       {isLogined() ? (
         <div className="toggle">
           <NavDropdown title={getUsername()} id="basic-nav-dropdown">
-            <NavDropdown.Item href="/post">글쓰기</NavDropdown.Item>
+            <NavDropdown.Item href="/post/new">글쓰기</NavDropdown.Item>
             <NavDropdown.Item href="/profile">프로필</NavDropdown.Item>
-            <NavDropdown.Item onClick={() => {}}>내가 쓴 글</NavDropdown.Item>
+            <NavDropdown.Item href="/my_posts">내가 쓴 글</NavDropdown.Item>
             <NavDropdown.Divider />
             <NavDropdown.Item href="/" onClick={doLogout}>
               로그아웃

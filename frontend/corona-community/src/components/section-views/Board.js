@@ -183,7 +183,7 @@ const Board = props => {
                   50개
                 </NavDropdown.Item>
               </NavDropdown>
-              <Button className="write" href="/post">
+              <Button className="write" href="/post/new">
                 글쓰기
               </Button>
             </div>

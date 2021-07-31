@@ -24,4 +24,11 @@ public class CommentRestController {
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
+
+    @DeleteMapping(path = "/board/detail/comment/{id}")
+    public HttpEntity removeComment(@PathVariable("id") Long id) {
+        commentService.removeComment(id);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
 }
