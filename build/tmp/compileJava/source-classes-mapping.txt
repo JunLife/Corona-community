@@ -42,11 +42,11 @@ com/community/app/controller/CommentRestController.java
  com.community.app.controller.CommentRestController
 com/community/app/model/Comment.java
  com.community.app.model.Comment
-com/community/app/jwt/JWTRequestFilter.java
- com.community.app.jwt.JWTRequestFilter
+com/community/app/controller/MyRestController.java
+ com.community.app.controller.MyRestController
 com/community/app/service/MemberDetailsService.java
  com.community.app.service.MemberDetailsService
 com/community/app/config/SecurityConfig.java
  com.community.app.config.SecurityConfig
-com/community/app/controller/MyRestController.java
- com.community.app.controller.MyRestController
+com/community/app/jwt/JWTRequestFilter.java
+ com.community.app.jwt.JWTRequestFilter
