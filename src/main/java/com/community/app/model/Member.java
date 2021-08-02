@@ -35,7 +35,6 @@ public class Member {
     @Column(length = 16)
     private String lastName;
 
-    private String photo;
     private String greeting;
     private int age;
 }

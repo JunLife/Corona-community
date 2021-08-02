@@ -43,7 +43,7 @@ const Board = props => {
         </td>
         <td onClick={() => props.history.push(`/modify_post/${item['id']}`)}>
           {' '}
-          &ensp;&emsp;{item['recommend']}
+          &ensp;&emsp;{item['recommends'].length}
         </td>
         <td onClick={() => props.history.push(`/modify_post/${item['id']}`)}>
           {getCreatedDate(item['createdDate'])}

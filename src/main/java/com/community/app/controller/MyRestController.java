@@ -19,13 +19,21 @@ public class MyRestController {
         this.memberDetailsService = memberDetailsService;
     }
 
+    // 더미 데이터 생성용
     @GetMapping(path = "/")
-    public HttpEntity home1() {
-        for (int i = 0; i < 100; i++) {
+    public HttpEntity home() {
+        for (int i = 0; i < 200; i++) {
             Post post = new Post();
             post.setTitle(i + " 번째 글");
             post.setText(i + " 번째 내용");
-            post.setMember(memberDetailsService.getMemberByEmail("alswns9288@gmail.com"));
+            if (i % 3 == 0) {
+                post.setMember(memberDetailsService.getMemberByEmail("alswns9288@gmail.com"));
+            } else if (i % 3 == 1) {
+                post.setMember(memberDetailsService.getMemberByEmail("user1@gmail.com"));
+            } else {
+                post.setMember(memberDetailsService.getMemberByEmail("user2@gmail.com"));
+            }
+
             postRepository.save(post);
         }
         return new ResponseEntity(HttpStatus.OK);
@@ -35,10 +43,5 @@ public class MyRestController {
     public String getGrade() {
         String photoData = memberDetailsService.getEncodedPhoto();
         return "{\"photo\": " + " \"" + photoData + "\"" + "}";
-    }
-
-    @GetMapping(path = "/adminTest")
-    public String test1() {
-        return "adminTest";
     }
 }

@@ -57,4 +57,16 @@ public class MemberDetailsService implements UserDetailsService {
             throw new ApiRequestException("Photo Not Found");
         }
     }
+
+    public void modifyProfile(Member member, String email) {
+        Member targetMember = memberRepository.findByEmail(email);
+
+        targetMember.setAge(member.getAge());
+        targetMember.setLastName(member.getLastName());
+        targetMember.setFirstName(member.getFirstName());
+        targetMember.setGreeting(member.getGreeting());
+        targetMember.setPhoneNumber(member.getPhoneNumber());
+
+        memberRepository.save(targetMember);
+    }
 }

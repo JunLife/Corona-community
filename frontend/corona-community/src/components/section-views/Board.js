@@ -62,7 +62,7 @@ const Board = props => {
         <td>{item['id']}</td>
         <td className="title">{item['title']}</td>
         <td> &ensp;&emsp;{item['comments'].length}</td>
-        <td> &ensp;&emsp;{item['recommend']}</td>
+        <td> &ensp;&emsp;{item['recommends'].length}</td>
         <td>{getUsername(item['member']['email'])}</td>
         <td>{getCreatedDate(item['createdDate'])}</td>
       </tr>

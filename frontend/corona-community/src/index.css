@@ -89,6 +89,7 @@ body {
   justify-content: center;
   font-weight: bolder;
   font-size: large;
+  box-shadow: none;
 }
 
 .homeItem:hover {
@@ -619,6 +620,25 @@ tbody .list_item:hover {
   height: 100%;
 }
 
+.board_body .board_text {
+  min-height: 150px;
+}
+
+.board_body .board_recommend {
+  display: flex;
+  margin: 16px;
+  padding-top: 32px;
+  border-top: solid 1px var(--gray-light);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.board_recommend .fa-thumbs-up:hover {
+  cursor: pointer;
+  color: var(--blue);
+}
+
 .board_image {
   max-width: 700px;
   max-height: auto;
@@ -722,6 +742,62 @@ tbody .list_item:hover {
   border-radius: 16px;
   width: 400px;
   height: 450px;
+}
+
+.profile {
+  padding: 16px 32px 16px 32px;
+  border: solid 1px var(--gray-light);
+  border-radius: 8px;
+  background-color: var(--light);
+  width: 100%;
+  height: 100%;
+}
+
+.profile .file {
+  border: solid 1px #ced4da;
+  padding: 2px;
+  border-radius: 4px;
+}
+
+.profile .profile_header {
+  margin: 16px 0px;
+}
+
+.profile .profile_header h2 {
+  font-weight: bolder;
+  margin-bottom: 32px;
+}
+
+.profile_container {
+  padding-top: 16px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile_file {
+  margin: 0px auto;
+  margin-bottom: 32px;
+  width: 98%;
+}
+
+.profile_input {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile_name {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.profile_detail {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
 .make_account {

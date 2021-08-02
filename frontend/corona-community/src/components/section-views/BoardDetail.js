@@ -14,7 +14,7 @@ const BoardDetail = props => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [imageName, setImageName] = useState([]);
-  const [recommend, setRecommend] = useState(0);
+  const [recommends, setRecommends] = useState([]);
   const [comments, setComments] = useState([]);
   const [membername, setMembername] = useState('');
   const [createdDate, setCreatedDate] = useState('');
@@ -25,10 +25,38 @@ const BoardDetail = props => {
     setInputComment(e.target.value);
   };
 
+  const doRecommend = async () => {
+    if (!isLogined()) {
+      props.history.push('/login');
+      alert('로그인을 해주세요.');
+      return;
+    }
+
+    const response = await fetch(
+      `/board/detail/${props.match.params.id}/recommend/${localStorage.getItem(
+        'email'
+      )}`,
+      {
+        method: 'POST',
+        mode: 'cors',
+      }
+    );
+
+    if (response.status === 400) {
+      alert('게시글당 한번만 추천할 수 있습니다.');
+      return;
+    } else if (response.status !== 201) {
+      alert('잠시후 다시 시도해주세요.');
+    }
+
+    await fetchData();
+  };
+
   const doComment = async () => {
     if (!isLogined()) {
       props.history.push('/login');
       alert('로그인을 해주세요.');
+      return;
     }
 
     const data = {
@@ -93,7 +121,7 @@ const BoardDetail = props => {
 
     setTitle(data['title']);
     setContent(data['text']);
-    setRecommend(data['recommend']);
+    setRecommends(data['recommends'].length);
     setComments(data['comments']);
     setMembername(getUsername(data['member']['email']));
     setCreatedDate(getCreatedDate(data['createdDate']));
@@ -143,7 +171,7 @@ const BoardDetail = props => {
               {membername}&emsp;|&emsp;{createdDate}
             </div>
             <div className="board_sub_right_header">
-              추천 {recommend}&emsp;|&emsp;댓글 {comments.length}
+              추천 {recommends}&emsp;|&emsp;댓글 {comments.length}
             </div>
           </div>
           {imageName ? (
@@ -172,6 +200,14 @@ const BoardDetail = props => {
           <div></div>
         )}
         <div className="board_text">{content}</div>
+        <div className="board_recommend">
+          <i
+            className="far fa-thumbs-up"
+            style={{ fontSize: 'xxx-large' }}
+            onClick={doRecommend}
+          ></i>
+          <div style={{ marginTop: '8px' }}>{recommends}</div>
+        </div>
       </div>
 
       <div className="board_footer">

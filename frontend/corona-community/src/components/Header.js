@@ -28,7 +28,7 @@ const Header = () => {
             {/* <Image src="./avatar.png" roundedCircle className="header_avatar" /> */}
             <i
               className="fas fa-user-circle"
-              style={{ fontSize: 'xx-large' }}
+              style={{ fontSize: 'xx-large', color: '#007bff' }}
             ></i>
           </span>
         </div>
