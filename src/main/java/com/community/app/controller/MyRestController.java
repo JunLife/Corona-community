@@ -27,7 +27,7 @@ public class MyRestController {
             post.setTitle(i + " 번째 글");
             post.setText(i + " 번째 내용");
             if (i % 3 == 0) {
-                post.setMember(memberDetailsService.getMemberByEmail("alswns9288@gmail.com"));
+                post.setMember(memberDetailsService.getMemberByEmail("user3@gmail.com"));
             } else if (i % 3 == 1) {
                 post.setMember(memberDetailsService.getMemberByEmail("user1@gmail.com"));
             } else {
@@ -36,6 +36,7 @@ public class MyRestController {
 
             postRepository.save(post);
         }
+
         return new ResponseEntity(HttpStatus.OK);
     }
 

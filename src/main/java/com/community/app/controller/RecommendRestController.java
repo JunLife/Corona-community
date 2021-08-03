@@ -1,6 +1,5 @@
 package com.community.app.controller;
 
-//import com.community.app.service.RecommendService;
 import com.community.app.service.RecommendService;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;

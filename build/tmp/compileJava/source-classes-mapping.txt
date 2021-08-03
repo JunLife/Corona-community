@@ -52,9 +52,9 @@ com/community/app/controller/BoardAndPostRestController.java
  com.community.app.controller.BoardAndPostRestController
 com/community/app/config/SecurityConfig.java
  com.community.app.config.SecurityConfig
-com/community/app/controller/MyRestController.java
- com.community.app.controller.MyRestController
-com/community/app/controller/RecommendRestController.java
- com.community.app.controller.RecommendRestController
 com/community/app/service/RecommendService.java
  com.community.app.service.RecommendService
+com/community/app/controller/RecommendRestController.java
+ com.community.app.controller.RecommendRestController
+com/community/app/controller/MyRestController.java
+ com.community.app.controller.MyRestController
