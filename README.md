@@ -13,6 +13,7 @@ https://youtu.be/DWU_UwwVmy4
 > * Spring Boot
 > * Spring Security
 > * Spring Data JPA
+> * MariaDB
 >
 > 
 > Frontend
