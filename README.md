@@ -1,5 +1,8 @@
 ##코로나19 커뮤니티 사이트
-<hr>
+
+##시연 영상: 유튜브
+https://youtu.be/DWU_UwwVmy4
+<br><hr>
 
 ###Tools
 > Backend
