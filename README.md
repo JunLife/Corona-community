@@ -3,7 +3,7 @@
 <br><hr> 
 
 ##시연 영상: 유튜브
-https://youtu.be/DWU_UwwVmy4
+https://youtu.be/DWU_UwwVmy4 <br>
 https://youtu.be/FySB04Y3gdQ : 검색기능 누락되어 추가 업로드 했습니다.
 <br><hr>
 
