@@ -225,6 +225,9 @@ JPA의 Pageable 인터페이스를 이용해서 구현했습니다.
 ![comment1](https://user-images.githubusercontent.com/62829284/128835481-50151739-1cca-4162-a1aa-864f7a473f46.gif)
 ![comment2](https://user-images.githubusercontent.com/62829284/128835484-1665e89e-364b-4006-ac65-df819ac8c7cb.gif)
 
+<br>
+댓글 삭제의 유저 검증은 frontend에서 진행되었습니다.
+
 <hr>
 
 8. 글 쓰기
@@ -276,6 +279,49 @@ multipartfile이 존재하면 이미지가 서버 저장소에 저장되고, 이
 9. 글 수정
 
 ![modify](https://user-images.githubusercontent.com/62829284/128835698-6295b667-2a97-4b56-96eb-9d1db23972af.gif)
+
+<br>
+새로 지정한 글의 data가 backend로 전송되면, 기존에 서버 저장소에 저장된 이미지는 삭제되고
+<br>
+새로 등록한 이미지가 있다면 그 이미지가 저장됩니다.
+<br>
+
+```
+
+    public void modifyPost(Long id, MultipartFile file, String title, String text) {
+        try {
+            Post post = findPostById(id);
+
+            if (deleteFile(post.getPhotoName())) {
+                post.setPhotoName(null);
+            }
+
+            String fileName = createFile(file);
+
+            if (fileName != null) {
+                post.setPhotoName(fileName);
+            }
+            post.setTitle(title);
+            post.setText(text);
+            post.setPhotoData(null);
+
+            postRepository.save(post);
+        } catch (Exception e) {
+            throw new ApiRequestException("Failed To Modify Post");
+        }
+    }
+
+    private boolean deleteFile(String fileName) throws Exception {
+        File file = new File(path + fileName);
+
+        if (file.exists()) {
+            file.delete();
+            return true;
+        }
+        return false;
+    }
+
+```
 
 <hr>
 
