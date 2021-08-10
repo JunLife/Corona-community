@@ -49,15 +49,61 @@ https://youtu.be/FySB04Y3gdQ : 검색기능 누락되어 추가 업로드 했습
 <br>
 
 <h3>주요기능</h3>
+<br>
 
 1. openAPI 정보 보여주기
-https://user-images.githubusercontent.com/62829284/128833010-76e83aa7-b4c9-4a35-9001-ae76f880da62.mp4
 
-3. 회원가입
-4. 로그인
-5. 게시글 목록 보여주기, 페이지네이션
-6. 글 검색 (제목)
-7. 게시글 추천, 중복 추천 방지
-8. 댓글 달기, 댓글 삭제
-9. 글 쓰기
-10. 글 수정
+![openAPI](https://user-images.githubusercontent.com/62829284/128834914-49a4b749-e404-4c33-b68f-d07520ad8031.gif)
+
+<hr>
+
+2. 회원가입
+
+![signup](https://user-images.githubusercontent.com/62829284/128835296-4f408d3e-60eb-428d-bb69-c44caca5d086.gif)
+
+<hr>
+
+3. 로그인
+
+![login](https://user-images.githubusercontent.com/62829284/128835313-8926a9da-c1c2-4356-8d1f-921bddf4af85.gif)
+
+<hr>
+
+4. 게시글 목록 보여주기, 페이지네이션
+
+![pagination](https://user-images.githubusercontent.com/62829284/128835487-494584bf-b4bd-43ad-8c7d-32227f58993e.gif)
+
+<hr>
+
+5. 글 검색 (제목)
+
+![search](https://user-images.githubusercontent.com/62829284/128835479-229c13be-8be5-491d-8667-020cacfaa834.gif)
+
+<hr>
+
+6. 게시글 추천, 중복 추천 방지
+
+![recommend1](https://user-images.githubusercontent.com/62829284/128835491-d1ce40a5-491d-4156-b21f-4b5058a4ee48.gif)
+![recommend2](https://user-images.githubusercontent.com/62829284/128835473-4cea1e2d-02f7-4ab5-b8e7-39a521411cd0.gif)
+
+<hr>
+
+7. 댓글 달기, 댓글 삭제
+
+![write](https://user-images.githubusercontent.com/62829284/128835667-ea7f8093-6af5-4dbb-9a6b-713d158c061c.gif)
+
+<hr>
+
+8. 글 쓰기
+
+![comment1](https://user-images.githubusercontent.com/62829284/128835481-50151739-1cca-4162-a1aa-864f7a473f46.gif)
+![comment2](https://user-images.githubusercontent.com/62829284/128835484-1665e89e-364b-4006-ac65-df819ac8c7cb.gif)
+
+<hr>
+
+9. 글 수정
+
+![modify](https://user-images.githubusercontent.com/62829284/128835698-6295b667-2a97-4b56-96eb-9d1db23972af.gif)
+
+<hr>
+
