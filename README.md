@@ -67,12 +67,109 @@ https://youtu.be/FySB04Y3gdQ : 검색기능 누락되어 추가 업로드 했습
 비밀번호 일치 확인 또한 frontend에서 검증되도록 했습니다.
 <br>
 이메일 중복검증은 backend에서 유저목록을 findByEmail하여 확인했습니다.
+<br>
+```
+    public void checkMember(String memberEmail) {
+        Member existMember = memberRepository.findByEmail(memberEmail);
+
+        if (existMember != null) {
+            throw new ApiRequestException("Email Already Exists");
+        }
+    }
+```
 
 <hr>
 
 3. 로그인
 
 ![login](https://user-images.githubusercontent.com/62829284/128847952-5bab151b-d028-4ff4-a167-e99f5c53a7ee.gif)
+
+<br>
+Spring Security filter를 이용해서 구현했습니다.
+<br>
+사용자가 인증을 요청하면 필터에서 인증을 시도하고, jwt를 생성해서 cookie에 저장되도록 했습니다.
+<br>
+```
+@Override
+    public Authentication attemptAuthentication(HttpServletRequest request,
+                                                HttpServletResponse response) {
+        try {
+            JWTAuthenticationRequest authenticationRequest = new ObjectMapper()
+                    .readValue(request.getInputStream(), JWTAuthenticationRequest.class);
+
+            Authentication authentication = new UsernamePasswordAuthenticationToken(
+                    authenticationRequest.getEmail(),
+                    authenticationRequest.getPassword()
+            );
+
+            Authentication authenticate = authenticationManager.authenticate(authentication);
+
+            return authenticate;
+
+        } catch (Exception e) {
+            throw new ApiRequestException("Failed At AttemptAuthentication");
+        }
+    }
+
+    @Override
+    protected void successfulAuthentication(HttpServletRequest request,
+                                            HttpServletResponse response,
+                                            FilterChain chain,
+                                            Authentication authResult) throws IOException, ServletException {
+        String accessToken = jwtUtil.generateToken(authResult);
+        response.addCookie(cookieUtil.createAccessCookie(accessToken));
+
+        SecurityContextHolder.getContext().setAuthentication(authResult);
+
+        chain.doFilter(request, response);
+    }
+```
+<br>
+또한 사용자가 요청하면 oncePerRequestFilter를 extends하여 인가되도록 했습니다.
+<br>
+```
+    @Override
+    protected void doFilterInternal(HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    FilterChain filterChain) throws ServletException, IOException {
+        Optional<Cookie> accessToken = cookieUtil.getCookie(request);
+
+        if (accessToken == null) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        accessToken.ifPresent(token -> {
+                    String jws = token.getValue();
+
+                    if (jwtUtil.isValidToken(jws)) {
+                        Claims claims = jwtUtil.getTokenBody(jws);
+
+                        String username = claims.getSubject();
+
+                        var authorities = (List<Map<String, String>>) claims.get("authorities");
+
+                        Set<SimpleGrantedAuthority> simpleGrantedAuthorities = authorities.stream()
+                                .map(m -> new SimpleGrantedAuthority(m.get("authority")))
+                                .collect(Collectors.toSet());
+
+                        Authentication authentication = new UsernamePasswordAuthenticationToken(
+                                username,
+                                null,
+                                simpleGrantedAuthorities
+                        );
+
+                        SecurityContextHolder.getContext().setAuthentication(authentication);
+                    } else {
+                        throw new IllegalStateException(String.format("Token %s cannot be trusted", token));
+                    }
+
+                }
+        );
+
+        filterChain.doFilter(request, response);
+    }
+```
 
 <hr>
 
@@ -127,6 +224,26 @@ JPA의 Pageable 인터페이스를 이용해서 구현했습니다.
 multipartfile이 존재하면 이미지가 서버 저장소에 저장되고, 이미지의 이름이 DB에 저장됩니다.
 <br>
 이미지의 식별을 위해서 이미지 이름 앞에 저장된 시간을 같이 네이밍했습니다.
+<br>
+
+```
+    public void save(Post post, String memberEmail, MultipartFile file) {
+        try {
+            Member member = memberRepository.findByEmail(memberEmail);
+            post.setMember(member);
+
+            String fileName = createFile(file);
+
+            if (fileName != null) {
+                post.setPhotoName(fileName);
+            }
+
+            postRepository.save(post);
+        } catch (Exception e) {
+            throw new ApiRequestException("Failed To Upload Post");
+        }
+    }
+```
 
 <hr>
 
