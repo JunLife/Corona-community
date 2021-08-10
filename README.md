@@ -68,7 +68,9 @@ https://youtu.be/FySB04Y3gdQ : 검색기능 누락되어 추가 업로드 했습
 <br>
 이메일 중복검증은 backend에서 유저목록을 findByEmail하여 확인했습니다.
 <br>
+
 ```
+
     public void checkMember(String memberEmail) {
         Member existMember = memberRepository.findByEmail(memberEmail);
 
@@ -76,7 +78,10 @@ https://youtu.be/FySB04Y3gdQ : 검색기능 누락되어 추가 업로드 했습
             throw new ApiRequestException("Email Already Exists");
         }
     }
+    
 ```
+
+<br>
 
 <hr>
 
@@ -89,7 +94,9 @@ Spring Security filter를 이용해서 구현했습니다.
 <br>
 사용자가 인증을 요청하면 필터에서 인증을 시도하고, jwt를 생성해서 cookie에 저장되도록 했습니다.
 <br>
+
 ```
+
 @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) {
@@ -123,11 +130,15 @@ Spring Security filter를 이용해서 구현했습니다.
 
         chain.doFilter(request, response);
     }
+    
 ```
+
 <br>
 또한 사용자가 요청하면 oncePerRequestFilter를 extends하여 인가되도록 했습니다.
 <br>
+
 ```
+
     @Override
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
@@ -169,8 +180,10 @@ Spring Security filter를 이용해서 구현했습니다.
 
         filterChain.doFilter(request, response);
     }
+    
 ```
 
+<br>
 <hr>
 
 4. 게시글 목록 보여주기, 페이지네이션
@@ -227,6 +240,7 @@ multipartfile이 존재하면 이미지가 서버 저장소에 저장되고, 이
 <br>
 
 ```
+
     public void save(Post post, String memberEmail, MultipartFile file) {
         try {
             Member member = memberRepository.findByEmail(memberEmail);
@@ -243,6 +257,18 @@ multipartfile이 존재하면 이미지가 서버 저장소에 저장되고, 이
             throw new ApiRequestException("Failed To Upload Post");
         }
     }
+    
+        private String createFile(MultipartFile file) throws Exception {
+        if (file != null) {
+            String fileName = new Date().getTime() + "_" + file.getOriginalFilename();
+            File dest = new File(path + fileName);
+            file.transferTo(dest);
+
+            return fileName;
+        }
+        return null;
+    }
+    
 ```
 
 <hr>
