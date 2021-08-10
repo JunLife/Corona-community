@@ -1,11 +1,13 @@
 ##코로나19 커뮤니티 사이트
 
-<br><hr> 
+<br>
+ㅡㅡㅡ
 
 ##시연 영상: 유튜브 <br>
 https://youtu.be/DWU_UwwVmy4 <br>
 https://youtu.be/FySB04Y3gdQ : 검색기능 누락되어 추가 업로드 했습니다.
-<br><hr>
+<br>
+ㅡㅡㅡ
 
 ###Tools
 > Backend
@@ -24,7 +26,9 @@ https://youtu.be/FySB04Y3gdQ : 검색기능 누락되어 추가 업로드 했습
 > * React-Bootstrap
 > * React-Chart.js
 
-<br><hr><br>
+<br>
+ㅡㅡㅡ
+<br>
 
 ###넣을(완성) 기능 리스트:
 * 코로나 현황: <br>
@@ -39,5 +43,6 @@ https://youtu.be/FySB04Y3gdQ : 검색기능 누락되어 추가 업로드 했습
 > 9. 추천 CR (o)
 > 10. 프로필 (o)
 
-<br><hr> 
+<br>
+ㅡㅡㅡ
 
